@@ -6,9 +6,13 @@ export type Instance = {
 export type Map = {
     id: string
     name: string
-    //width: number
-    //height: number
-    //image: string
+    image: MapImage | null
+}
+
+export type MapImage = {
+    width: number,
+    height: number,
+    image: string
 }
 
 export type MLPoint = {
@@ -31,9 +35,9 @@ export type Robot = {
 }
 
 export enum RobotStatus {
-    OFFLINE,
-    IDLE,
-    WORKING,
-    MISLOCALIZED,
-    ERROR
+    Offline = "OFFLINE",
+    Idle = "IDLE",
+    Working = "WORKING",
+    Mislocalized = "MISLOCALIZED",
+    Error = "ERROR"
 }
