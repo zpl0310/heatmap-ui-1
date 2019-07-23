@@ -1,14 +1,15 @@
 import * as React from 'react'
 import { Component, RefObject } from 'react'
-import { Application, Container, Loader, Sprite, Ticker } from 'pixi.js'
+import { Application, Container, Loader, Sprite, TextureLoader, Texture } from 'pixi.js'
 import { Viewport } from 'pixi-viewport'
-import * as TWEEN from '@tweenjs/tween.js';
+import * as TWEEN from '@tweenjs/tween.js'
 
 import { WORLD_OPTIONS, CENTER_ANCHOR, MAX_FPS } from './constants'
 import '../../assets/styles/heatmap.scss'
-import RobotLayer from './RobotLayer';
-import map from '../../assets/testmap.png' // TODO: Get map image from Redux
+import RobotLayer from './RobotLayer'
 import robot from '../../assets/freight100.png' // TODO: Figure out why SVG loading doesn't work
+import { getMapImage } from './getMapImage'
+import { MapImage } from '../../definitions';
 
 type MapProps = {
     robots: Object
@@ -22,6 +23,7 @@ class Map extends Component<MapProps, {}> {
     private world!: Container
     private robotLayer!: RobotLayer
     private application!: Application
+    private mapImg!: MapImage
 
     constructor(props: MapProps) {
         super(props)
@@ -35,13 +37,22 @@ class Map extends Component<MapProps, {}> {
         this.viewport.resize(window.innerWidth, window.innerHeight);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const rendererCanvas = this.renderer.current
         const parentContainerDiv = this.parentContainer.current
 
         if (!rendererCanvas || !parentContainerDiv) {
             throw new Error('Invalid DOM Composition. Missing map DOM elements')
         }
+
+        // Load necessary resources
+        // TODO: Move loading somewhere better
+        this.mapImg = await getMapImage(3) as MapImage
+        Loader.registerPlugin(new TextureLoader())
+        Loader.shared
+            .add('robot', robot)
+            .add('map', this.mapImg.image) // TODO: Unique key per map, grab map from Redux
+            .load(() => this.startApp())
 
         // Application setup
         this.application = new Application({
@@ -61,8 +72,8 @@ class Map extends Component<MapProps, {}> {
         this.viewport = new Viewport({
             screenWidth: window.innerHeight,
             screenHeight: window.innerHeight,
-            worldWidth: WORLD_OPTIONS.width,
-            worldHeight: WORLD_OPTIONS.height,
+            worldWidth: this.mapImg.width,
+            worldHeight: this.mapImg.height,
             interaction: this.application.renderer.plugins.interaction
         })
 
@@ -70,12 +81,12 @@ class Map extends Component<MapProps, {}> {
             .drag({ clampWheel: true, direction: "all", underflow: "center" })
             .pinch({ noDrag: true })
             .clamp({ direction: "all" })
-            .zoom(WORLD_OPTIONS.width - window.innerWidth, true)
+            .zoom(this.mapImg.width - window.innerWidth, true)
             .wheel({ smooth: 10 })
             .clampZoom({
-                maxHeight: WORLD_OPTIONS.height * 1.5,
+                maxHeight: this.mapImg.height * 1.5,
                 minHeight: window.innerHeight / 2,
-                maxWidth: WORLD_OPTIONS.width * 1.5,
+                maxWidth: this.mapImg.width * 1.5,
                 minWidth: window.innerWidth / 2
             })
 
@@ -88,19 +99,14 @@ class Map extends Component<MapProps, {}> {
 
         // Robot layer setup
         this.robotLayer = new RobotLayer()
-
-        // Load necessary resources
-        Loader.shared
-            .add('robot', robot)
-            .add('map', map)
-            .load(() => this.startApp())
+        this.robotLayer.position.y = this.mapImg.height
     }
 
     startApp() {
         // Map layer setup
         const mapSprite = new Sprite(Loader.shared.resources['map'].texture)
         mapSprite.anchor = CENTER_ANCHOR
-        mapSprite.position.set(WORLD_OPTIONS.width / 2, WORLD_OPTIONS.height / 2)
+        mapSprite.position.set(this.mapImg.width / 2, this.mapImg.height / 2)
 
         // Add layers to world
         this.world.addChild(mapSprite)

@@ -26,7 +26,7 @@ export default class Robot extends Sprite {
         this.rotation = this.pose.theta
         this.position.set(
             this.pose.x / MAP_PIXEL_RATIO,
-            -WORLD_OPTIONS.height + this.pose.y / MAP_PIXEL_RATIO
+            this.pose.y / MAP_PIXEL_RATIO
         )
     }
 }

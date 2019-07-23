@@ -1,4 +1,4 @@
-import { Container, Sprite } from 'pixi.js'
+import { Container } from 'pixi.js'
 import Robot from './Robot'
 import { DEFAULT_SCALE } from './constants';
 import { Pose } from '../../definitions';
