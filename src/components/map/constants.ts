@@ -13,4 +13,4 @@ export const WORLD_OPTIONS = {
     width: 1434,
 }
 
-export const ROBOT_SIZE = 15
+export const ROBOT_SIZE = 10

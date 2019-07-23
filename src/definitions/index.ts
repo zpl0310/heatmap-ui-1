@@ -28,9 +28,7 @@ export type ChartPoint = {
 
 export type Robot = {
     id: string
-    x: number
-    y: number
-    theta: number
+    pose: Pose
     status: RobotStatus
 }
 
@@ -40,4 +38,10 @@ export enum RobotStatus {
     Working = "WORKING",
     Mislocalized = "MISLOCALIZED",
     Error = "ERROR"
+}
+
+export type Pose = {
+    x: number
+    y: number
+    theta: number
 }

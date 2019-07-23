@@ -1,13 +1,14 @@
 import * as React from 'react'
 import { Component, RefObject } from 'react'
-import { Application, Container, Loader, Sprite } from 'pixi.js'
+import { Application, Container, Loader, Sprite, Ticker } from 'pixi.js'
 import { Viewport } from 'pixi-viewport'
+import * as TWEEN from '@tweenjs/tween.js';
 
-import { WORLD_OPTIONS, CENTER_ANCHOR } from './constants'
+import { WORLD_OPTIONS, CENTER_ANCHOR, MAX_FPS } from './constants'
 import '../../assets/styles/heatmap.scss'
-import robot from '../../assets/freight100.png' // TODO: Figure out why SVG loading doesn't work
 import RobotLayer from './RobotLayer';
 import map from '../../assets/testmap.png' // TODO: Get map image from Redux
+import robot from '../../assets/freight100.png' // TODO: Figure out why SVG loading doesn't work
 
 type MapProps = {
     robots: Object
@@ -28,11 +29,11 @@ class Map extends Component<MapProps, {}> {
         this.parentContainer = React.createRef()
         this.renderer = React.createRef()
     }
-    
+
     handleResize() {
-		this.application.renderer.resize(window.innerWidth, window.innerHeight);
-		this.viewport.resize(window.innerWidth, window.innerHeight);
-	}
+        this.application.renderer.resize(window.innerWidth, window.innerHeight);
+        this.viewport.resize(window.innerWidth, window.innerHeight);
+    }
 
     componentDidMount() {
         const rendererCanvas = this.renderer.current
@@ -70,19 +71,20 @@ class Map extends Component<MapProps, {}> {
             .pinch({ noDrag: true })
             .clamp({ direction: "all" })
             .zoom(WORLD_OPTIONS.width - window.innerWidth, true)
-            .wheel({ smooth: 3 })
+            .wheel({ smooth: 10 })
             .clampZoom({
                 maxHeight: WORLD_OPTIONS.height * 1.5,
                 minHeight: window.innerHeight / 2,
                 maxWidth: WORLD_OPTIONS.width * 1.5,
                 minWidth: window.innerWidth / 2
             })
-            
+
         this.world = new Container()
 
         // Add viewport and world to stage
         this.application.stage.addChild(this.viewport)
         this.viewport.addChild(this.world)
+        this.handleResize()
 
         // Robot layer setup
         this.robotLayer = new RobotLayer()
@@ -90,7 +92,7 @@ class Map extends Component<MapProps, {}> {
         // Load necessary resources
         Loader.shared
             .add('robot', robot)
-            .add('map', map, (e: any) => console.log(e))
+            .add('map', map)
             .load(() => this.startApp())
     }
 
@@ -105,10 +107,11 @@ class Map extends Component<MapProps, {}> {
         this.world.addChild(this.robotLayer)
 
         this.application.start()
-    }
-
-    componentDidUpdate() {
-        this.robotLayer.load(this.props.robots)
+        this.application.ticker.maxFPS = MAX_FPS
+        this.application.ticker.add(() => {
+            this.robotLayer.load(this.props.robots, this.application.ticker.deltaMS)
+            TWEEN.update(this.application.ticker.lastTime)
+        })
     }
 
     render() {

@@ -47,9 +47,7 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
         if (obj.stream === 'robot-states') {
             let robotData: Robot = {
                 id: data.id,
-                x: data.current_pose.x,
-                y: data.current_pose.y,
-                theta: data.current_pose.theta,
+                pose: data.current_pose,
                 status: RobotStatus.Working
             }
             this.setState(prevState => ({
@@ -58,6 +56,7 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
                     [data.id]: robotData
                 }
             }))
+            // TODO: Robot states in Redux?
         }
     }
 

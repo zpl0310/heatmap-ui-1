@@ -1,22 +1,32 @@
-import {Loader, Sprite } from 'pixi.js'
+import { Loader, Sprite } from 'pixi.js'
 import { CENTER_ANCHOR, ROBOT_SIZE, MAP_PIXEL_RATIO, WORLD_OPTIONS } from './constants';
+import { Pose } from '../../definitions'
+import { Tween, Easing } from '@tweenjs/tween.js'
 
-type RobotProps = {
-    x: number
-    y: number
-    rotation: number
-}
+export default class Robot extends Sprite {
+    private pose: Pose
+    constructor(pose: Pose) {
+        super(Loader.shared.resources['robot'].texture)
+        this.anchor = CENTER_ANCHOR
+        this.width = ROBOT_SIZE
+        this.height = ROBOT_SIZE
+        this.pose = pose
+        this.setPositionByPose()
+    }
 
-export default function Robot(props: RobotProps) {
-    const texture = Loader.shared.resources['robot'].texture
-    let sprite = new Sprite(texture)
-    sprite.rotation = props.rotation
-    sprite.anchor = CENTER_ANCHOR
-    sprite.width = ROBOT_SIZE
-    sprite.height = ROBOT_SIZE
-    sprite.position.set(
-        props.x / MAP_PIXEL_RATIO,
-        -WORLD_OPTIONS.height + props.y / MAP_PIXEL_RATIO
-    )
-    return sprite
+    update(nextPose: Pose, deltaTime: number) {
+        new Tween(this.pose)
+            .to(nextPose, deltaTime)
+            .easing(Easing.Linear.None)
+            .onUpdate(() => this.setPositionByPose())
+            .start()
+    }
+
+    setPositionByPose() {
+        this.rotation = this.pose.theta
+        this.position.set(
+            this.pose.x / MAP_PIXEL_RATIO,
+            -WORLD_OPTIONS.height + this.pose.y / MAP_PIXEL_RATIO
+        )
+    }
 }
