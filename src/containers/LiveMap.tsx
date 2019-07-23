@@ -71,7 +71,6 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
             <div>
                 <Map
                     robots={this.state.robots}
-                    mapPath={'../../assets/testmap.png'}
                 />
             </div>
         );

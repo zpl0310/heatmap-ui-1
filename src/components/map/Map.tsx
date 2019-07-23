@@ -13,7 +13,6 @@ import { MapImage } from '../../definitions';
 
 type MapProps = {
     robots: Object
-    mapPath: string
 }
 
 class Map extends Component<MapProps, {}> {
@@ -47,7 +46,7 @@ class Map extends Component<MapProps, {}> {
 
         // Load necessary resources
         // TODO: Move loading somewhere better
-        this.mapImg = await getMapImage(3) as MapImage
+        this.mapImg = await getMapImage(3) as MapImage // TODO: Get map ID from route
         Loader.registerPlugin(new TextureLoader())
         Loader.shared
             .add('robot', robot)
@@ -90,6 +89,7 @@ class Map extends Component<MapProps, {}> {
                 minWidth: window.innerWidth / 2
             })
 
+        // World setup
         this.world = new Container()
 
         // Add viewport and world to stage
@@ -113,7 +113,6 @@ class Map extends Component<MapProps, {}> {
         this.world.addChild(this.robotLayer)
 
         this.application.start()
-        this.application.ticker.maxFPS = MAX_FPS
         this.application.ticker.add(() => {
             this.robotLayer.load(this.props.robots, this.application.ticker.deltaMS)
             TWEEN.update(this.application.ticker.lastTime)

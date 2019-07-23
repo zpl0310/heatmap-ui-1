@@ -11,7 +11,7 @@ export async function getMapImage(id: number) {
         return await getDimensions(imgBase64)
     })
         .catch((err: Error) => {
-            // TODO: Error handling
+            // TODO: Proper error handling
             console.log(err)
             return {
                 width: 0,
