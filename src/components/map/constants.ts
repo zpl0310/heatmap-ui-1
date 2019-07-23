@@ -8,10 +8,9 @@ export const MAP_PADDING = 50
 export const MAP_PIXEL_RATIO = 0.05
 
 export const MAX_FPS = 24
-export const STAGE_OPTIONS = {
-    height: 1600,
-    width: 2000,
-    backgroundColor: 0x10bb99
+export const WORLD_OPTIONS = {
+    height: 785,
+    width: 1434,
 }
 
-export const ROBOT_SIZE = 20
+export const ROBOT_SIZE = 15

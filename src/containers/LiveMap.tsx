@@ -2,8 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import '../assets/styles/heatmap.scss';
 import Map from '../components/map/Map';
-import { Texture } from 'pixi.js';
-import * as PIXI from 'pixi.js'
+import { Robot, RobotStatus } from '../definitions';
 
 type LiveMapProps = {
 }
@@ -25,7 +24,7 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
         super(props)
 
         // TODO: Determine map from route
-        this.ws = new WebSocket("ws://localhost:8888/api/v1/streams/maps/2/robots/")
+        this.ws = new WebSocket("ws://localhost:8888/api/v1/streams/maps/3/robots/")
         this.ws.onopen = this.handleWSOpen
         this.ws.onclose = this.handleWSClose
         this.ws.onmessage = this.handleWSMessage
@@ -46,10 +45,17 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
         let data = obj.payload.data
 
         if (obj.stream === 'robot-states') {
+            let robotData: Robot = {
+                id: data.id,
+                x: data.current_pose.x,
+                y: data.current_pose.y,
+                theta: data.current_pose.theta,
+                status: RobotStatus.Working
+            }
             this.setState(prevState => ({
                 robots: {
                     ...prevState.robots,
-                    [data.id]: data.current_pose
+                    [data.id]: robotData
                 }
             }))
         }
@@ -58,6 +64,7 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
     handleWSError = (ev: Event) => {
         console.log('websocket error: ')
         console.log(ev)
+        //TODO: Proper error handling
     }
 
     render() {
@@ -65,7 +72,7 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
             <div>
                 <Map
                     robots={this.state.robots}
-                    mapTexture={PIXI.Texture.from('../assets/testmap.png')}
+                    mapPath={'../../assets/testmap.png'}
                 />
             </div>
         );
