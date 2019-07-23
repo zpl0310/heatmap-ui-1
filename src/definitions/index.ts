@@ -12,7 +12,7 @@ export type Map = {
 export type MapImage = {
     width: number,
     height: number,
-    image: string
+    image: string //not sure
 }
 
 export type MLPoint = {
