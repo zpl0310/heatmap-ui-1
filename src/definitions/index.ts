@@ -3,10 +3,12 @@ export type Instance = {
     name: string
 }
 
-export type Map = {
+export type MapInfo = {
     id: string
     name: string
-    image: MapImage | null
+    x: number
+    y: number
+    image: MapImage
 }
 
 export type MapImage = {

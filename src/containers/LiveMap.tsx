@@ -4,7 +4,8 @@ import '../assets/styles/heatmap.scss';
 import Map from '../components/map/Map';
 import { Robot, RobotStatus, RobotMap } from '../definitions';
 import { RobotStatePositionCache } from '../components/map/robotStreamCache';
-import DequeChangeBuffer from '../components/map/changeBuffer';
+import axios, { AxiosResponse } from 'axios'
+import { DEV_MAP_ID, DEV_TOKEN, DEV_INSTANCE } from '../components/map/constants';
 
 type LiveMapProps = {
 }
@@ -17,16 +18,42 @@ const initialState = {
     robots: {},
 }
 
+// Fetches all initial robot states, recursing to cover each page
+// TODO: Move to a Redux action and store in state
+export async function getRobotStates(id: number, page: number = 1, results: RobotMap = {}): Promise<RobotMap> {
+    return axios.get(`http://${DEV_INSTANCE}/api/v1/maps/${id}/robots/?page=${page}`, {
+        headers: { 'Authorization': DEV_TOKEN },
+    }).then((res: AxiosResponse) => {
+        res.data.results.forEach((robot: Robot) => {
+            if (!results[robot.id]) {
+                results[robot.id] = {
+                    id: robot.id,
+                    status: robot.status,
+                    pose: {x: 0, y: 0, theta: 0}
+                }
+            }
+        })
 
+        if (res.data.next) {
+            return getRobotStates(id, page + 1, results)
+        }
+        return results
+    }).catch((err: Error) => {
+        // TODO: Proper error handling
+        console.log(err)
+        return {}
+    })
+}
 class LiveMap extends Component<LiveMapProps, LiveMapState> {
-    private ws: WebSocket
+    private ws!: WebSocket
     readonly state: LiveMapState = initialState
 
-    constructor(props: LiveMapProps) {
-        super(props)
+    async componentDidMount() {
+        this.setState({ robots: await getRobotStates(DEV_MAP_ID) })
 
         // TODO: Determine map from route
-        this.ws = new WebSocket("ws://localhost:8888/api/v1/streams/maps/4/robots/")
+        // TODO: Move websocket logic to its own component?
+        this.ws = new WebSocket(`ws://${DEV_INSTANCE}/api/v1/streams/maps/${DEV_MAP_ID}/robots/`)
         this.ws.onopen = this.handleWSOpen
         this.ws.onclose = this.handleWSClose
         this.ws.onmessage = this.handleWSMessage
@@ -45,28 +72,37 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
     handleWSMessage = (ev: MessageEvent) => {
         let obj = JSON.parse(ev.data)
         let data = obj.payload.data
+        let robot = this.state.robots[data.id]
+
+        // Initialize robot if a new one pops up
+        if (!robot) {
+            robot = {
+                id: data.id,
+                status: RobotStatus.Idle,
+                pose: { x: 0, y: 0, theta: 0 }
+            }
+        }
+
+        let updatedRobot = Object.assign({}, robot)
 
         if (obj.stream === 'robot-states') {
-            let robot: Robot = {
-                id: data.id,
-                pose: data.current_pose,
-                status: RobotStatus.Working,
-            }
-
+            updatedRobot.pose = data.current_pose
             const timestamp = performance.now()
             RobotStatePositionCache.updatePositionForRobot(
-                robot.id,
-                robot.pose,
+                updatedRobot.id,
+                updatedRobot.pose,
                 timestamp,
             )
-
-            this.setState(prevState => ({
-                robots: {
-                    ...prevState.robots,
-                    [data.id]: robot
-                }
-            }))
+        } else if (obj.stream === 'robots') {
+            updatedRobot.status = data.status
         }
+
+        this.setState(prevState => ({
+            robots: {
+                ...prevState.robots,
+                [data.id]: updatedRobot
+            }
+        }))
     }
 
     handleWSError = (ev: Event) => {

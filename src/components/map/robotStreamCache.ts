@@ -64,7 +64,7 @@ export class RobotPositionsCache {
         if (!this.store[id]) {
             // NOTE: Minimum size of this buffer should be interpolation delay * robot state update rate.
             // For 200ms interpolation delay, this is 2 (0.2 * 10). 3 or higher should be safe.
-            this.store[id] = new DequeChangeBuffer(4)
+            this.store[id] = new DequeChangeBuffer(5)
         }
 
         // double-precision (64-bit) required if using DOMHighResTimeStamp; otherwise single-precision will suffice
@@ -103,6 +103,7 @@ export class RobotPositionsCache {
     }
 }
 
+// TODO: Adapt this to our Redux setup
 // /**
 //  * Class used to aggregate robot stream updates and throttle their dispatch to the redux store
 //  */

@@ -12,8 +12,8 @@ export default class Robot extends Sprite {
             pose.y / MAP_PIXEL_RATIO
         )
 
-        this.renderRobot(status)
         this.renderStatus(status)
+        this.renderRobot(status)
     }
 
     private renderRobot(status: RobotStatus) {
@@ -31,7 +31,7 @@ export default class Robot extends Sprite {
 
     private renderStatus(status: RobotStatus) {
         let circle = new Graphics()
-        circle.lineStyle(2, STATUS_COLORS[status], 0.5)
+        circle.lineStyle(3, STATUS_COLORS[status], 0.75)
         circle.drawCircle(0, 0, ROBOT_SIZE * 0.5)
         circle.endFill()
         this.addChild(circle)
