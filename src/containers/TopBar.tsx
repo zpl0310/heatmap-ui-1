@@ -1,31 +1,39 @@
 import * as React from 'react';
+import { connect } from 'react-redux'
 import { Component } from 'react';
+
 import '../assets/styles/topbar.scss';
 import NavList from '../components/TopBar/NavList';
 import HeatMapItem from '../components/TopBar/HeatMapItem';
 import CompareItem from '../components/TopBar/CompareItem';
+import { dispatchActions } from '../store/dispatch';
+import { AppState } from '../store';
 
 type TopBarProps = {
 }
 
 type TopBarState = {
     //need to get from redux store
-    curMap: string
     curNav: string
 }
 
+export interface OwnProps {
+    
+}
 
-class TopBar extends Component<TopBarProps, TopBarState> {
-    constructor(props: TopBarProps) {
+const mapStateToProps = (state: AppState, ownProps: OwnProps) => ({ ...state, ...ownProps })
+type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof dispatchActions>
+
+class TopBar extends Component<Props, TopBarState> {
+    constructor(props: Props) {
         super(props);
         this.state = {
-            curMap: "Cool Map",
             curNav: "History",
         }
     }
 
     render() {
-        const {curMap,curNav} = this.state
+        const {curNav} = this.state
         let display = (
             <div className="topMid"> 
                 <CompareItem />
@@ -48,7 +56,7 @@ class TopBar extends Component<TopBarProps, TopBarState> {
         return (
             <div className="topBar">
                 <div className="topLeft">
-                    <label>{curMap}</label>
+                    <label>{this.props.maps.current}</label>
                 </div>
                 <br className="clear" />
                 {display}
@@ -61,4 +69,4 @@ class TopBar extends Component<TopBarProps, TopBarState> {
     }
 }
 
-export default TopBar;
+export default connect(mapStateToProps, dispatchActions)(TopBar);
