@@ -26,7 +26,7 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
         super(props)
 
         // TODO: Determine map from route
-        this.ws = new WebSocket("ws://localhost:8888/api/v1/streams/maps/3/robots/")
+        this.ws = new WebSocket("ws://localhost:8888/api/v1/streams/maps/4/robots/")
         this.ws.onopen = this.handleWSOpen
         this.ws.onclose = this.handleWSClose
         this.ws.onmessage = this.handleWSMessage
@@ -79,6 +79,7 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
         return (
             <div>
                 <Map
+                    showRobots
                     robots={this.state.robots}
                 />
             </div>

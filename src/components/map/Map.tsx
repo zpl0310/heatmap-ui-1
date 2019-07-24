@@ -11,7 +11,8 @@ import { getMapImage } from './getMapImage'
 import { MapImage, RobotMap } from '../../definitions';
 
 type MapProps = {
-    robots: RobotMap
+    robots?: RobotMap
+    showRobots?: boolean
 }
 
 class Map extends Component<MapProps, {}> {
@@ -45,7 +46,7 @@ class Map extends Component<MapProps, {}> {
 
         // Load necessary resources
         // TODO: Move loading somewhere better
-        this.mapImg = await getMapImage(3) as MapImage // TODO: Get map ID from route
+        this.mapImg = await getMapImage(4) as MapImage // TODO: Get map ID from route
         Loader.registerPlugin(new TextureLoader())
         Loader.shared
             .add('robot', robot)
@@ -95,10 +96,6 @@ class Map extends Component<MapProps, {}> {
         this.application.stage.addChild(this.viewport)
         this.viewport.addChild(this.world)
         this.handleResize()
-
-        // Robot layer setup
-        this.robotLayer = new RobotLayer()
-        this.robotLayer.position.y = this.mapImg.height
     }
 
     startApp() {
@@ -106,16 +103,25 @@ class Map extends Component<MapProps, {}> {
         const mapSprite = new Sprite(Loader.shared.resources['map'].texture)
         mapSprite.anchor = CENTER_ANCHOR
         mapSprite.position.set(this.mapImg.width / 2, this.mapImg.height / 2)
-
-        // Add layers to world
         this.world.addChild(mapSprite)
-        this.world.addChild(this.robotLayer)
+
 
         this.application.start()
-        //this.application.ticker.maxFPS = MAX_FPS
-        this.application.ticker.add(() => {
-            this.robotLayer.update(this.props.robots)
-        })
+
+        if (this.props.showRobots) {
+            if  (!this.props.robots) {
+                throw new Error("No robots provided to display")
+            }
+            // Robot layer setup
+            this.robotLayer = new RobotLayer()
+            this.robotLayer.position.y = this.mapImg.height
+            this.world.addChild(this.robotLayer)
+
+            //this.application.ticker.maxFPS = MAX_FPS
+            this.application.ticker.add(() => {
+                this.robotLayer.update(this.props.robots!)
+            })
+        }
     }
 
     render() {
