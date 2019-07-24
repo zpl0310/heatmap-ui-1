@@ -45,3 +45,12 @@ export type Pose = {
     y: number
     theta: number
 }
+
+export type PoseAtTime = {
+    pose: Pose
+    time: number
+}
+
+export type RobotMap = {
+    [id: string]: Robot
+}

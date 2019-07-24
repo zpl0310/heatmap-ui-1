@@ -1,27 +1,26 @@
 import { Container } from 'pixi.js'
-import Robot from './Robot'
-import { DEFAULT_SCALE } from './constants';
-import { Pose } from '../../definitions';
+import RobotSprite from './Robot'
+import { DEFAULT_SCALE, INTERPOLATION_DELAY } from './constants';
+import { Pose, PoseAtTime, RobotMap } from '../../definitions';
+import DequeChangeBuffer from './changeBuffer';
+import { RobotStatePositionCache } from './robotStreamCache';
+
 
 export default class RobotLayer extends Container {
-    private curRobots: { [id: string]: Robot } = {}
     constructor() {
         super()
         this.name = 'RobotLayer'
         this.scale = DEFAULT_SCALE
     }
 
-    public load(robots: Object, deltaTime: number) {
+    public update(robots: RobotMap) {
+        const delayedTimestamp = performance.now() - INTERPOLATION_DELAY
+        this.removeChildren()
         if (robots) {
             for (let robot of Object.values(robots)) {
-                let pose: Pose = robot.pose
-                if (!this.curRobots[robot.id]) {
-                    const sprite = new Robot(pose)
-                    this.addChild(sprite)
-                    this.curRobots[robot.id] = sprite
-                } else {
-                    this.curRobots[robot.id].update(pose, deltaTime)
-                }
+                const pose = RobotStatePositionCache.getPositionForRobot(robot.id, delayedTimestamp)
+                const sprite = new RobotSprite(pose)
+                this.addChild(sprite)
             }
         }
     }

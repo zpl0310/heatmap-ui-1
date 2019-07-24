@@ -1,18 +1,17 @@
 import * as React from 'react'
 import { Component, RefObject } from 'react'
-import { Application, Container, Loader, Sprite, TextureLoader, Texture } from 'pixi.js'
+import { Application, Container, Loader, Sprite, TextureLoader } from 'pixi.js'
 import { Viewport } from 'pixi-viewport'
-import * as TWEEN from '@tweenjs/tween.js'
 
-import { WORLD_OPTIONS, CENTER_ANCHOR, MAX_FPS } from './constants'
+import { CENTER_ANCHOR, MAX_FPS } from './constants'
 import '../../assets/styles/heatmap.scss'
 import RobotLayer from './RobotLayer'
-import robot from '../../assets/freight100.png' // TODO: Figure out why SVG loading doesn't work
+import robot from '../../assets/freight100.svg'
 import { getMapImage } from './getMapImage'
-import { MapImage } from '../../definitions';
+import { MapImage, RobotMap } from '../../definitions';
 
 type MapProps = {
-    robots: Object
+    robots: RobotMap
 }
 
 class Map extends Component<MapProps, {}> {
@@ -59,7 +58,7 @@ class Map extends Component<MapProps, {}> {
             width: parentContainerDiv.clientWidth,
             height: parentContainerDiv.clientHeight,
             antialias: false,
-            resolution: 1,
+            resolution: window.devicePixelRatio,
             backgroundColor: 0x999999,
         })
 
@@ -113,9 +112,9 @@ class Map extends Component<MapProps, {}> {
         this.world.addChild(this.robotLayer)
 
         this.application.start()
+        //this.application.ticker.maxFPS = MAX_FPS
         this.application.ticker.add(() => {
-            this.robotLayer.load(this.props.robots, this.application.ticker.deltaMS)
-            TWEEN.update(this.application.ticker.lastTime)
+            this.robotLayer.update(this.props.robots)
         })
     }
 

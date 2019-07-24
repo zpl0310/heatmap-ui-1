@@ -2,13 +2,15 @@ import * as React from 'react';
 import { Component } from 'react';
 import '../assets/styles/heatmap.scss';
 import Map from '../components/map/Map';
-import { Robot, RobotStatus } from '../definitions';
+import { Robot, RobotStatus, RobotMap } from '../definitions';
+import { RobotStatePositionCache } from '../components/map/robotStreamCache';
+import DequeChangeBuffer from '../components/map/changeBuffer';
 
 type LiveMapProps = {
 }
 
 type LiveMapState = {
-    robots: Object
+    robots: RobotMap
 }
 
 const initialState = {
@@ -45,18 +47,25 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
         let data = obj.payload.data
 
         if (obj.stream === 'robot-states') {
-            let robotData: Robot = {
+            let robot: Robot = {
                 id: data.id,
                 pose: data.current_pose,
-                status: RobotStatus.Working
+                status: RobotStatus.Working,
             }
+
+            const timestamp = performance.now()
+            RobotStatePositionCache.updatePositionForRobot(
+                robot.id,
+                robot.pose,
+                timestamp,
+            )
+
             this.setState(prevState => ({
                 robots: {
                     ...prevState.robots,
-                    [data.id]: robotData
+                    [data.id]: robot
                 }
             }))
-            // TODO: Robot states in Redux?
         }
     }
 

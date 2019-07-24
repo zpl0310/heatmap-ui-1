@@ -14,3 +14,5 @@ export const WORLD_OPTIONS = {
 }
 
 export const ROBOT_SIZE = 10
+
+export const INTERPOLATION_DELAY = 200
