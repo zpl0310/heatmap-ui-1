@@ -1,0 +1,73 @@
+$divider-color:#f7f7f7;
+$blue-color:#4681b8;
+
+.fetch-logo {
+    height: 90px;
+    padding: 10px 10px;
+    border-bottom: 2px solid $divider-color;
+}
+
+.selectLabel {
+    height: 120px;
+    padding-top: 10px;
+    text-align: center;
+    color: grey;
+    font-size: 20px;
+    border-bottom: 2px solid $divider-color;
+}
+
+.curInstanceLabel {
+    padding-top: 10%;
+    padding-left: 10px;
+    text-align: center;
+    color: darkgray;
+    font-weight: bold;
+    font-size: 28px;   
+}
+
+.backDiv {
+    height: 60px;
+    border-bottom: 2px solid $divider-color;
+}
+
+.backMidDiv {
+    height: 21px;
+    padding-top:13px;
+    padding-left: 25px;
+}
+
+.searchBox {
+    padding-top: 20px;
+    text-align: center;
+    width: 60%;
+    height: 50px;
+    margin: auto;
+    padding-left:4%;
+}
+
+.list {
+    margin-top: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.list > li {
+    height: 60px;
+    padding-left: 20%;
+    color: grey;
+    font-size: 20px;
+    border-bottom: 1px solid $divider-color;
+}
+
+.list >li:hover {
+    border-left: 2px solid $blue-color;
+    transition: background-color 0.5s ease;
+    background: $divider-color;
+    font-weight: bold;
+    cursor: pointer;
+    color: $blue-color;
+}
+
+.list > li > div {
+    padding-top: 16px;
+}

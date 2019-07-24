@@ -1,19 +1,19 @@
 import { Instance } from '../../definitions'
 import { LOAD_INSTANCES,
         CHANGE_INSTANCE, 
-        FAIL_INSTANCE_LOADING,
-        STOP_INSTANCE_LOADING,
-        START_INSTANCE_LOADING,
+        //FAIL_INSTANCE_LOADING,
+        //STOP_INSTANCE_LOADING,
+        //START_INSTANCE_LOADING,
         InstanceAction,
  } from '.'
-import { AppState } from '../../store'
+//import { AppState } from '../../store'
 
-import { ThunkDispatch } from 'redux-thunk'
-import axios, { AxiosResponse } from 'axios'
+//import { ThunkDispatch } from 'redux-thunk'
+//import axios, { AxiosResponse } from 'axios'
 
-export const changeInstance = (instance: Instance): InstanceAction => ({
+export const changeInstance = (instanceName: string): InstanceAction => ({
     type: CHANGE_INSTANCE,
-    instance
+    instanceName
 }) 
 
 // need to change after api set up

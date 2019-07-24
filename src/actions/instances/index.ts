@@ -27,7 +27,7 @@ type LoadInstancesAction = {
 
 type ChangeInstanceAction = {
     type: typeof CHANGE_INSTANCE
-    instance: Instance
+    instanceName: string
 }
 
 export type InstanceAction = LoadInstancesAction |
@@ -39,6 +39,6 @@ export type InstanceAction = LoadInstancesAction |
 export type InstanceStoreState = {
     loading: boolean
     list: Instance[]
-    current: Instance | null
+    current: string
     error: string
 }

@@ -16,8 +16,10 @@ class MapListItem extends React.Component<MapListItemProps, MapListItemState> {
         return (  
             <li 
                 //onClick = {this.props.changeInstance()}
-            >
-                {this.props.name}
+            >   
+                <div>
+                    {this.props.name}
+                </div>
             </li>
         );
     }

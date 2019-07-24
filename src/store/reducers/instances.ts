@@ -13,7 +13,7 @@ import {
 const initial: InstanceStoreState = {
     loading: false,
     list: [],
-    current: null,
+    current: "",
     error: "",
 }
 
@@ -26,7 +26,7 @@ export default function instances(state = initial, action: InstanceAction): Inst
             })
         case CHANGE_INSTANCE:
             return Object.assign({},state,{
-                current: action.instance,
+                current: action.instanceName,
                 error:"",
             })
         case FAIL_INSTANCE_LOADING:
