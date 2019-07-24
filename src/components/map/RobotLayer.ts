@@ -19,8 +19,11 @@ export default class RobotLayer extends Container {
         if (robots) {
             for (let robot of Object.values(robots)) {
                 const pose = RobotStatePositionCache.getPositionForRobot(robot.id, delayedTimestamp)
-                const sprite = new RobotSprite(pose, robot.status)
-                this.addChild(sprite)
+
+                if (pose.x !== 0 && pose.y !== 0 && pose.theta !== 0) {
+                    const sprite = new RobotSprite(pose, robot.status)
+                    this.addChild(sprite)
+                }
             }
         }
     }

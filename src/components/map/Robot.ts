@@ -5,11 +5,6 @@ import { Pose, RobotStatus } from '../../definitions'
 export default class Robot extends Sprite {
     constructor(pose: Pose, status: RobotStatus) {
         super()
-
-        if (pose.x === 0 && pose.y === 0 && pose.theta === 0) {
-            return
-        }
-
         this.anchor = CENTER_ANCHOR
         this.rotation = pose.theta
         this.position.set(
