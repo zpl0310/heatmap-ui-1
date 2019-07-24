@@ -6,6 +6,7 @@ export const STOP_MAP_LOADING = 'STOP_MAP_LOADING'
 export const FAIL_MAP_LOADING = 'FAIL_MAP_LOADING'
 export const CHANGE_MAP = 'CHANGE_MAP'
 export const CLEAR_CURMAP = 'CLEAR_CURMAP'
+export const LOAD_CUR_MAP = 'LOAD_CUR_MAP'
 
 //TODO: add single map
 type StartMapLoadingAction = {
@@ -35,12 +36,18 @@ type ClearCurMap = {
     type: typeof CLEAR_CURMAP
 }
 
+type LoadCurMap = {
+    type: typeof LOAD_CUR_MAP
+    mapURL: string
+}
+
 export type MapAction = LoadMapsAction |
     StartMapLoadingAction | 
     StopMapLoadingAction | 
     FailMapLoadingAction |
     ChangeMapAction |
-    ClearCurMap
+    ClearCurMap | 
+    LoadCurMap
 
 export type MapStoreState = {
     loading: boolean
