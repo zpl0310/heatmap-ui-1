@@ -22,14 +22,14 @@ class TimeFrame extends React.Component<TimeFrameProps, TimeFrameState> {
 
     handleBtnClick = () => {
         this.setState({
-            show: true
+            show: !this.state.show
         })
     }
 
-    handleLiClick = () => {
+    handleLiClick = (s:string) => {
         this.setState ({
-            show: false,
-            curInterval: '1'
+            show: !this.state.show,
+            curInterval: s
         })
     }
 
@@ -40,7 +40,12 @@ class TimeFrame extends React.Component<TimeFrameProps, TimeFrameState> {
 
 
         const list = selection.filter(num => {return num !== curInterval}).map((num)=>(
-            <li key={num}> {num} {num==='1'? 'Month':'Months'} </li>
+            <li 
+                onClick={()=> this.handleLiClick(num)}
+                key={num}
+            > 
+                {num} {num==='1'? 'Month':'Months'} 
+            </li>
         ))
 
         let display = (<div />)

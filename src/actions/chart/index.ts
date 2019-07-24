@@ -1,6 +1,6 @@
 import { ChartPoint } from '../../definitions'
 
-export const LOAD_CHART = 'LOAD_CHART'
+export const SET_CHART = 'SET_CHART'
 export const START_CHART_LOADING = 'START_CHART_LOADING'
 export const STOP_CHART_LOADING = 'STOP_CHART_LOADING'
 export const FAIL_CHART_LOADING = 'FAIL_CHART_LOADING'
@@ -9,8 +9,8 @@ export const CHANGE_ENDDATE = 'CHANGE_ENDDATE'
 export const CHANGE_CUR_SELECTION = 'CHANGE_CUR_SELECTION'
 export const CHANGE_INTERVAL = 'CHANGE_INTERVAL'
 
-type loadChart = {
-    type: typeof LOAD_CHART
+type setChart = {
+    type: typeof SET_CHART
     chartPoints: ChartPoint[]
 }
 
@@ -47,7 +47,7 @@ type changeInterval = {
     interval: number
 }
 
-export type chartAction = loadChart|
+export type chartAction = setChart|
         startChartLoading | 
         stopChartLoading |
         failChartLoading |
