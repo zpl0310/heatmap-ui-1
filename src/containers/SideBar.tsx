@@ -35,7 +35,7 @@ class SideBar extends Component<Props, SideBarState> {
         }
     }
 
-
+    //switch between instance list and map list
     changeSidebarView = () => {
         this.setState({
             displayInstance: !this.state.displayInstance,
@@ -54,6 +54,9 @@ class SideBar extends Component<Props, SideBarState> {
         } else {
             display = (
                 <MapList 
+                    curMap={this.props.maps.current}
+                    onChangeMap={this.props.onChangeMap}
+                    onClearCurMap={this.props.onClearCurMap}
                     curInstance={this.props.instances.current}
                     changeSidebarView={this.changeSidebarView}
                 />

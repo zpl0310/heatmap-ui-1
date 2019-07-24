@@ -4,6 +4,7 @@ import {
     FAIL_MAP_LOADING,
     STOP_MAP_LOADING,
     START_MAP_LOADING,
+    CLEAR_CURMAP,
     MapAction,
     MapStoreState,
 }from '../../actions/maps'
@@ -13,7 +14,7 @@ import {
 const initial: MapStoreState = {
     loading: false,
     list: [],
-    current: null,
+    current: "",
     error: "",
 }
 
@@ -26,7 +27,7 @@ export default function maps(state = initial, action: MapAction): MapStoreState 
             })
         case CHANGE_MAP:
             return Object.assign({},state,{
-                current: action.map,
+                current: action.mapName,
                 error:"",
             })
         case FAIL_MAP_LOADING:
@@ -40,6 +41,10 @@ export default function maps(state = initial, action: MapAction): MapStoreState 
         case START_MAP_LOADING:
             return Object.assign({}, state, {
                 loading: true
+            })
+        case CLEAR_CURMAP:
+            return Object.assign({},state,{
+                current:""
             })
         default:
             return state

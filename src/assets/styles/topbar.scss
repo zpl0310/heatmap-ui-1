@@ -2,9 +2,9 @@ $blue-color:#4681b8;
 $divider-color:#f7f7f7;
 
 .topBar {
+    margin-top: 0;
     min-width: 800px;
-    height: 90px;
-    overflow: auto;   
+    height: 10%;
 }
 
 .topLeft {
@@ -12,10 +12,10 @@ $divider-color:#f7f7f7;
     min-width: 100px;
     color: $blue-color;
     font-weight: bold;
-    font-size: 50px;
-    height: 30px;
-    padding-top: 30px;
-    padding-left: 50px;
+    font-size: 2.5em;
+    height: 30%;
+    padding-top: 1.5%;
+    padding-left: 8%;
 }
 
 .topMid {
@@ -25,7 +25,7 @@ $divider-color:#f7f7f7;
 
 .topRight {
     float: right;
-    height: 90px;
+    height: 100%;
 }
 
 .clear {
@@ -35,15 +35,16 @@ $divider-color:#f7f7f7;
 
 .navs {
     width: 150px;
-    font-size: 20px;
+    font-size: 1.2em;
     height: 20px;
     text-align: center;
-    padding-top: 30px;
+    padding-top:1%;
+    padding-bottom: 1%;
 }
 
 .navsWrapper {
     float:left;
-    height: 90%;
+    height: 100%;
 }
 
 .navsWrapper:hover {   

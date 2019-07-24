@@ -5,16 +5,21 @@ import { LOAD_MAPS,
         STOP_MAP_LOADING,
         START_MAP_LOADING,
         MapAction,
+        CLEAR_CURMAP,
  } from '.'
 import { AppState } from '../../store'
 
 import { ThunkDispatch } from 'redux-thunk'
 import axios, { AxiosResponse } from 'axios'
 
-export const changeMap = (map: Map): MapAction => ({
+export const changeMap = (mapName: string): MapAction => ({
     type: CHANGE_MAP,
-    map
+    mapName
 }) 
+
+export const clearCurMap = (): MapAction => ({
+    type: CLEAR_CURMAP
+})
 
 // *** might need to change after api set up
 // export const loadMaps = (id: string) => async (dispatch: ThunkDispatch<AppState, undefined, MapAction>) => {

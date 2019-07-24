@@ -39,7 +39,7 @@ class TimeFrame extends React.Component<TimeFrameProps, TimeFrameState> {
         const { selection, label } = this.props
 
 
-        const list = selection.filter(num => {return num != curInterval}).map((num)=>(
+        const list = selection.filter(num => {return num !== curInterval}).map((num)=>(
             <li key={num}> {num} {num==='1'? 'Month':'Months'} </li>
         ))
 

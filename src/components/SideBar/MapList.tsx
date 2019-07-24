@@ -7,7 +7,10 @@ const back = require('../../assets/back1.svg') as string;
 
 export interface MapListProps {
     curInstance: string,
+    curMap:string,
     changeSidebarView: Function,
+    onChangeMap: Function,
+    onClearCurMap: Function,
 }
  
 export interface MapListState {
@@ -24,14 +27,20 @@ class MapList extends React.Component<MapListProps, MapListState> {
 
     handleClick = () => {
         this.props.changeSidebarView()
+        this.props.onClearCurMap()
     }
+ 
     render() { 
         const { mapNameList } = this.state
-        const { curInstance } = this.props
+        const { curMap, curInstance } = this.props
+
+
         const mapList = mapNameList.map((name)=>(
             <MapListItem 
                 key={name}
-                name = {name}
+                name={name}
+                curMap={curMap}
+                onChangeMap={this.props.onChangeMap}
             />
         )) 
         return (

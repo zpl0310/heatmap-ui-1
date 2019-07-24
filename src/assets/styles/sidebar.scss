@@ -2,8 +2,11 @@ $divider-color:#f7f7f7;
 $blue-color:#4681b8;
 
 .fetch-logo {
-    height: 90px;
-    padding: 10px 10px;
+    margin-right:5px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    
     border-bottom: 2px solid $divider-color;
 }
 
@@ -12,17 +15,17 @@ $blue-color:#4681b8;
     padding-top: 10px;
     text-align: center;
     color: grey;
-    font-size: 20px;
+    font-size: 1.6em;
     border-bottom: 2px solid $divider-color;
 }
 
 .curInstanceLabel {
-    padding-top: 10%;
-    padding-left: 10px;
+    padding-top: 7%;
+    padding-left: 1%;
     text-align: center;
     color: darkgray;
     font-weight: bold;
-    font-size: 28px;   
+    font-size: 1.6em;   
 }
 
 .backDiv {
@@ -39,7 +42,8 @@ $blue-color:#4681b8;
 .searchBox {
     padding-top: 20px;
     text-align: center;
-    width: 60%;
+    max-width: 90%;
+    min-width: 150px;
     height: 50px;
     margin: auto;
     padding-left:4%;
@@ -51,16 +55,22 @@ $blue-color:#4681b8;
     list-style-type: none;
 }
 
+.list .curMap {
+    color: $blue-color;
+    font-weight: bold;
+    border-left: 5px solid $blue-color;
+}
+
 .list > li {
     height: 60px;
     padding-left: 20%;
     color: grey;
-    font-size: 20px;
+    font-size: 1.2em;
     border-bottom: 1px solid $divider-color;
 }
 
 .list >li:hover {
-    border-left: 2px solid $blue-color;
+    border-left: 5px solid $blue-color;
     transition: background-color 0.5s ease;
     background: $divider-color;
     font-weight: bold;
@@ -71,3 +81,4 @@ $blue-color:#4681b8;
 .list > li > div {
     padding-top: 16px;
 }
+

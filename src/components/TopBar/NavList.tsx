@@ -20,9 +20,11 @@ class NavList extends React.Component<NavListProps, NavListState> {
     render() { 
         const { itemNames } = this.state
         const navList = itemNames.map((name) => (
-            <div className="navsWrapper">
-                <NavListItem
-                    key={name}
+            <div 
+                className="navsWrapper"
+                key={name}
+            >
+                <NavListItem   
                     name={name}
                 />
             </div>
