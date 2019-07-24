@@ -1,5 +1,6 @@
 import * as React from 'react';
 import MapListItem from './MapListItem';
+import '../../assets/styles/sidebar.scss';
 //import back from '../assets/back.png';
 declare var require: any
 const back = require('../../assets/back1.svg') as string;
@@ -35,11 +36,13 @@ class MapList extends React.Component<MapListProps, MapListState> {
         )) 
         return (
             <div> 
-                <div>
-                    <span><img src={back} alt="back" onClick={this.handleClick}/> </span>
-                    <label>CURRENT INSTANSE IS: {curInstance}</label>
+                <div className="backDiv">
+                    <div className="backMidDiv">
+                        <span className="backButton"><img src={back} alt="back" onClick={this.handleClick}/> </span>
+                        <label className="curInstanceLabel">  {curInstance}</label>
+                    </div>
                 </div>
-                <ul>{mapList}</ul>
+                <ul className="list">{mapList}</ul>
             </div>
         );
     }

@@ -1,0 +1,60 @@
+$blue-color:#4681b8;
+$divider-color:#f7f7f7;
+
+.topBar {
+    min-width: 800px;
+    height: 90px;
+    overflow: auto;   
+}
+
+.topLeft {
+    float: left;
+    min-width: 100px;
+    color: $blue-color;
+    font-weight: bold;
+    font-size: 50px;
+    height: 30px;
+    padding-top: 30px;
+    padding-left: 50px;
+}
+
+.topMid {
+    min-width: 200px;
+    float: left;
+}
+
+.topRight {
+    float: right;
+    height: 90px;
+}
+
+.clear {
+    clear: left;
+    clear: right;
+}
+
+.navs {
+    width: 150px;
+    font-size: 20px;
+    height: 20px;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.navsWrapper {
+    float:left;
+    height: 90%;
+}
+
+.navsWrapper:hover {   
+    color: $blue-color;
+    background-color: $divider-color;
+    transition: background-color 0.3s ease;
+    border-bottom: 3px solid $blue-color;
+}
+
+.navs:hover {
+    cursor: pointer;
+}
+
+

@@ -7,6 +7,7 @@ export const STOP_ROBOT_LOADING = 'STOP_ROBOT_LOADING'
 export const FAIL_ROBOT_LOADING = 'FAIL_ROBOT_LOADING'
 export const CHANGE_INTERVAL = 'CHANGE_INTERVAL'
 export const CLEAR_HEATMAP = 'CLEAR_HEATMAP'
+//export const CHANGE_ROBOT_STATE = 'CHANGE_ROBOt_STATE'
 
 type loadPoints = {
     type: typeof LOAD_POINTS

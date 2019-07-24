@@ -1,25 +1,40 @@
 import * as React from 'react';
+import { connect } from 'react-redux'
 import { Component } from 'react';
+
 import '../assets/styles/sidebar.scss';
 import InstanceList from '../components/SideBar/InstanceList';
 import MapList from '../components/SideBar/MapList';
+import { dispatchActions } from '../store/dispatch';
+import { AppState } from '../store';
+//import { Instance, Map, MapImage } from '../definitions';
+
 declare var require: any
 const fetchLogo = require("../assets/fetchcore.svg") as string;
 
 type SideBarProps = {
+    
 }
 
 type SideBarState = {
     displayInstance: boolean,
 }
 
-class SideBar extends Component<SideBarProps, SideBarState> {
-    constructor(props: SideBarProps) {
+export interface OwnProps {
+    
+}
+
+const mapStateToProps = (state: AppState, ownProps: OwnProps) => ({ ...state, ...ownProps })
+type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof dispatchActions>
+
+class SideBar extends Component<Props, SideBarState> {
+    constructor(props: Props) {
         super(props);
         this.state = {
             displayInstance: true,
         }
     }
+
 
     changeSidebarView = () => {
         this.setState({
@@ -32,19 +47,20 @@ class SideBar extends Component<SideBarProps, SideBarState> {
         if (this.state.displayInstance) {
             display = (      
                 <InstanceList 
+                    onChangeInstance={this.props.onChangeInstance}
                     changeSidebarView={this.changeSidebarView}
                 />            
             );
         } else {
             display = (
                 <MapList 
-                    curInstance={"a"}
+                    curInstance={this.props.instances.current}
                     changeSidebarView={this.changeSidebarView}
                 />
             )
         }
         return (
-            <div>
+            <div className="sideBar">
                 <img src={fetchLogo} className="fetch-logo" alt="logo" />
                 {display}
             </div>
@@ -52,4 +68,4 @@ class SideBar extends Component<SideBarProps, SideBarState> {
     }
 }
 
-export default SideBar;
+export default connect(mapStateToProps, dispatchActions)(SideBar);
