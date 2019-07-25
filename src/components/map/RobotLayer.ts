@@ -1,7 +1,7 @@
 import { Container } from 'pixi.js'
 import RobotSprite from './Robot'
 import { DEFAULT_SCALE, INTERPOLATION_DELAY } from './constants';
-import { RobotMap, RobotStatus } from '../../definitions';
+import { RobotMap } from '../../definitions';
 import { RobotStatePositionCache } from './robotStreamCache';
 
 

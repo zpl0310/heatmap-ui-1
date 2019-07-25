@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Component, RefObject } from 'react'
 import { Application, Container, Loader, Sprite, TextureLoader, Texture } from 'pixi.js'
 import { Viewport } from 'pixi-viewport'
-import h337 from 'heatmap.js'
+import h337, { Heatmap } from 'heatmap.js'
 
 import { CENTER_ANCHOR, MAX_FPS, DEV_MAP_ID, MAP_PIXEL_RATIO } from './constants'
 import '../../assets/styles/heatmap.scss'
@@ -25,6 +25,8 @@ class Map extends Component<MapProps, {}> {
     private robotLayer!: RobotLayer
     private application!: Application
     private map!: MapInfo
+    private heatmap!: Heatmap<string, string, string>
+    private heatmapSprite!: Sprite
 
     constructor(props: MapProps) {
         super(props)
@@ -36,6 +38,7 @@ class Map extends Component<MapProps, {}> {
     handleResize() {
         this.application.renderer.resize(window.innerWidth, window.innerHeight);
         this.viewport.resize(window.innerWidth, window.innerHeight);
+        this.initializeHeatmap()
     }
 
     async componentDidMount() {
@@ -66,7 +69,7 @@ class Map extends Component<MapProps, {}> {
         })
 
         window.addEventListener("resize", () => {
-            this.handleResize();
+            this.handleResize()
         })
 
         const dims = {
@@ -116,31 +119,7 @@ class Map extends Component<MapProps, {}> {
 
         this.application.start()
 
-        // Heatmap setup
-        let instance = h337.create({
-            container: document.querySelector('#fetch-map-container')! as HTMLElement,
-            maxOpacity: 0.2,
-            /*gradient: {
-                0: '#8888ff',
-                1: '#0000ff'
-            }*/
-        })
-        let fakeData = []
-        for (let i = 0; i < 1000; i++) {
-            let x = Math.floor(Math.random() * this.map.image.width)
-            let y = Math.floor(Math.random() * this.map.image.height)
-            fakeData.push({x, y, value: Math.pow(1 - Math.abs(0.5 * x - y) / this.map.image.width, 3)})
-        }
-
-        instance.setData({
-            max: 1,
-            min: 0,
-            data: fakeData
-        })
-
-        let hmTex = Texture.from(instance.getDataURL())
-        let hmSprite = new Sprite(hmTex)
-        this.world.addChild(hmSprite)
+        this.initializeHeatmap()
 
         if (this.props.showRobots) {
             if (!this.props.robots) {
@@ -157,6 +136,39 @@ class Map extends Component<MapProps, {}> {
                 this.robotLayer.update(this.props.robots!)
             })
         }
+    }
+
+    initializeHeatmap() {
+        let fakeData = []
+        for (let i = 0; i < 1000; i++) {
+            let x = Math.floor(Math.random() * this.map.image.width)
+            let y = Math.floor(Math.random() * this.map.image.height)
+            fakeData.push({x, y, value: Math.pow(1 - Math.abs(0.5 * x - y) / this.map.image.width, 3)})
+        }
+
+        // Heatmap setup
+        this.heatmap = h337.create({
+            container: document.querySelector('#fetch-map-container')! as HTMLElement,
+            maxOpacity: 0.2,
+        }).setData({
+            data: fakeData,
+            min: 0,
+
+            // Get maximum value in data
+            max: fakeData.map(point => point.value).reduce((prev, cur) => Math.max(prev, cur))
+        })
+
+        this.drawHeatmap()
+    }
+
+    drawHeatmap() {
+        let hmTex = Texture.from(this.heatmap.repaint().getDataURL())
+        let hmSprite = new Sprite(hmTex)
+        if (this.heatmapSprite) {
+            this.world.removeChild(this.heatmapSprite)
+        }
+        this.heatmapSprite = hmSprite
+        this.world.addChild(this.heatmapSprite)
     }
 
     render() {
