@@ -24,17 +24,17 @@ $background-color:grey;
 }
 
 .topMid {
-    min-width: 400px;
+    padding-top: 2%;
+    min-width: 350px;
     float: left;
     width: 35%;
 }
 
 .topRight {
-    float: right;
     min-width: 200px;
     width: 30%;
     border-left: 2px solid $divider-color;
-   
+    float: left;
 }
 
 .clear {
@@ -46,8 +46,8 @@ $background-color:grey;
     font-size: 1em;
     height: 20px;
     text-align: center;
-    padding-top:45%;
-    padding-bottom: 45%;
+    padding-top:32%;
+    padding-bottom: 32%;
 }
 
 .navsWrapper {
@@ -69,10 +69,29 @@ $background-color:grey;
     float: left;
     min-width: 100px;
     width: 10%;
+    padding-left: 2%;
+    text-align: center;
+}
+
+.frameLabel {
     color: $blue-color;
     font-size: 1em;
-    padding-left: 2%;
+    font-weight: bold;
 }
+
+.frameBtn {
+    width: 100%;
+    height: 25px;
+    font-size: 0.9em;
+}
+
+
+.frameList {
+    margin-top: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
 
 .labelContainer {
     float: left;

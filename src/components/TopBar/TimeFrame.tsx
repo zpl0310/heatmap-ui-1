@@ -53,7 +53,7 @@ class TimeFrame extends React.Component<TimeFrameProps, TimeFrameState> {
         if (show) {
             display = (
                 <div>
-                    <ul>
+                    <ul className="frameList">
                         {list}
                     </ul>
                 </div>
@@ -62,10 +62,13 @@ class TimeFrame extends React.Component<TimeFrameProps, TimeFrameState> {
 
         return (
             <div>
-                <div>
+                <div className="frameLabel">
                     <label> {label} </label>
                 </div>
-                <button onClick={this.handleBtnClick}>{curInterval} Month</button>
+                <button 
+                    className="frameBtn"
+                    onClick={this.handleBtnClick}>{curInterval}<span> </span>
+                     {curInterval==='1'? 'Month':'Months'}</button>
                 {display}
             </div>
         );
