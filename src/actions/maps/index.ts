@@ -1,4 +1,4 @@
-import { Map } from '../../definitions'
+import { MapInfo } from '../../definitions'
 
 export const LOAD_MAPS = 'LOAD_MAPS'
 export const START_MAP_LOADING = 'START_MAP_LOADING'
@@ -24,7 +24,7 @@ type FailMapLoadingAction = {
 
 type LoadMapsAction = {
     type: typeof LOAD_MAPS
-    maps: Map[]
+    maps: MapInfo[]
 }
 
 type ChangeMapAction = {
@@ -51,7 +51,7 @@ export type MapAction = LoadMapsAction |
 
 export type MapStoreState = {
     loading: boolean
-    list: Map[]
+    list: MapInfo[]
     current: string
     error: string
 }

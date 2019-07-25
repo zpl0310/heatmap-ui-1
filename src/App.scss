@@ -1,12 +1,13 @@
 .container {
-    overflow: auto;
+    overflow: hidden;
 }
 .leftSide {
     width: 25%;
     min-width: 250px;
     margin-left: 2px;
     float: left;
-    overflow: hidden;
+    height: 100vh;
+    overflow-y: hidden;
 }
 
 .rightSide {

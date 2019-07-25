@@ -6,7 +6,6 @@ $blue-color:#4681b8;
     padding-top: 10px;
     padding-left: 10px;
     padding-bottom: 10px;
-    
     border-bottom: 2px solid $divider-color;
 }
 
@@ -53,6 +52,7 @@ $blue-color:#4681b8;
     margin-top: 0;
     padding: 0;
     list-style-type: none;
+    overflow-y: auto;
 }
 
 .list .curMap {

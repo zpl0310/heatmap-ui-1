@@ -1,4 +1,4 @@
-import { Map } from '../../definitions'
+import { MapInfo } from '../../definitions'
 import { LOAD_MAPS,
         CHANGE_MAP, 
         FAIL_MAP_LOADING,
@@ -34,10 +34,12 @@ export const loadMaps = (id: string) => async (dispatch: ThunkDispatch<AppState,
             // }
         })
      
-        let maps = res.data.map((map: Map): Map => ({
+        let maps = res.data.map((map: MapInfo): MapInfo => ({
             id: map.id,
             name: map.name,
-            image: null,
+            x: map.x,
+            y: map.y,
+            image: {width: 0, height: 0, src: ''},
         }))
 
         dispatch({ type: LOAD_MAPS, maps })
