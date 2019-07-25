@@ -2,6 +2,7 @@ import * as React from 'react';
 import NavListItem from './NavListItem'
 
 export interface NavListProps {
+    curNav: string
     onNavChange: Function
 }
  
@@ -25,6 +26,7 @@ class NavList extends React.Component<NavListProps, NavListState> {
                 key={name}
             >
                 <NavListItem 
+                    curNav={this.props.curNav}
                     onNavChange={this.props.onNavChange}
                     name={name}
                 />
@@ -32,7 +34,9 @@ class NavList extends React.Component<NavListProps, NavListState> {
         ))
         return ( 
             <div className="topRight">
-                {navList}
+                <div className="topRightMid">
+                    {navList}
+                </div>
             </div>
         );
     }

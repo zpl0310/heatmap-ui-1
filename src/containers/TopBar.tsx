@@ -57,12 +57,13 @@ class TopBar extends Component<Props, TopBarState> {
         let topbar = (<div className="topBar" />)
         if (this.props.maps.current!=="") {
             topbar = (
-                <div >
+                <div className="topBarMid">
                     <div className="topLeft">
                         <label>{this.props.maps.current}</label>
                     </div>
                     {display}            
                     <NavList 
+                        curNav={this.state.curNav}
                         onNavChange={this.onNavChange}
                     />           
                     <br className="clear" />

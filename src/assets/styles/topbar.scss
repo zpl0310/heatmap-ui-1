@@ -4,37 +4,38 @@ $background-color:grey;
 
 .topBar {
     min-width: 800px;
-    min-height: 74px;
-    
+    min-height: 122px;  
+}
+
+.topBarMid {
+    display: flex;
+    flex-direction: row;
 }
 
 .topLeft {
-    float: left;
+    flex: 1;
     width: 18%;
     min-width: 100px;
     color: $blue-color;
     font-weight: bold;
     font-size: 2.5em;
     height: 30%;
-    padding-top: 1.5%;
+    padding-top: 2%;
     padding-left: 5%;
-    padding-right: 1%;
-    border-right: 2px solid $divider-color;
-
 }
 
 .topMid {
-    padding-top: 2%;
-    min-width: 350px;
-    float: left;
+    padding-top: 3%;
+    min-width: 380px;
+    flex: 1;
     width: 35%;
+    margin: 0 3%;
 }
 
 .topRight {
-    min-width: 200px;
+    min-width: 250px;
     width: 30%;
-    border-left: 2px solid $divider-color;
-    float: left;
+    flex: 1;
 }
 
 .clear {
@@ -50,8 +51,23 @@ $background-color:grey;
     padding-bottom: 32%;
 }
 
+.curNav {
+    font-weight: bold;
+    color: $blue-color;
+    border-bottom: 3px solid $blue-color;
+    min-width: 75px;
+    height: 20px;
+    text-align: center;
+    padding-top:32%;
+    padding-bottom: 32%;
+}
+
+.topRightMid {
+    display: flex;
+    flex-direction: row;
+}
 .navsWrapper {
-    float:left;
+    flex: 1;
 }
 
 .navsWrapper:hover {   
@@ -65,12 +81,34 @@ $background-color:grey;
     cursor: pointer;
 }
 
+.topMidMid {
+    display: flex;
+    flex-direction: row;
+}
+
 .hmTimeFrameDiv {
-    float: left;
+    flex: 1;
     min-width: 100px;
     width: 10%;
     padding-left: 2%;
     text-align: center;
+}
+
+.cmpFrameDiv {
+    flex: 1;
+    min-width: 100px;
+    width: 10%;
+    padding-left: 2%;
+    text-align: center;
+}
+.cmpFirstPeriod {
+    flex: 1;
+    min-width: 100px;
+}
+
+.cmpSecondPeriod {
+    flex: 1;
+    min-width: 100px;
 }
 
 .frameLabel {
@@ -80,8 +118,8 @@ $background-color:grey;
 }
 
 .frameBtn {
-    width: 100%;
-    height: 25px;
+    width: 70%;
+    height: 20px;
     font-size: 0.9em;
 }
 
@@ -94,18 +132,24 @@ $background-color:grey;
 
 
 .labelContainer {
-    float: left;
+    flex: 1;
     min-width: 210px;
 }
 
+.labelMidLayer {
+    display: flex;
+    flex-direction: row;
+}
+
 .numRobot {
-    float: left;
+    flex: 1;
     text-align: center;
     min-width: 100px;
+    margin: 0 5px;
 }
 
 .numML {
-    float: left;
+    flex: 1;
     text-align: center;
     min-width: 100px;
 }
@@ -115,5 +159,3 @@ $background-color:grey;
     font-weight: bold;
     color: $blue-color;
 }
-
-

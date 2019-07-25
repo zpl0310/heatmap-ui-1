@@ -15,16 +15,20 @@ class HeatMapItem extends React.Component<HeatMapItemProps, HeatMapItemState> {
     render() { 
         return ( 
             <div className="topMid">
-                <div className="hmTimeFrameDiv">
-                    <TimeFrame 
-                        label="TimeFrame"
-                        selection={["1","3","6"]}
-                    />
-                </div>              
-                <RobotLabel
-                    numRobot={100}
-                    numML={40}
-                />           
+                <div className="topMidMid">
+                    <div className="hmTimeFrameDiv">
+                        <TimeFrame 
+                            label="TimeFrame"
+                            selection={["1","3","6"]}
+                        />
+                    </div>  
+                    <div className="labelContainer">            
+                        <RobotLabel
+                            numRobot={100}
+                            numML={40}
+                        /> 
+                    </div>
+                </div>          
             </div>
         );
     }
