@@ -87,7 +87,7 @@ $background-color:grey;
 }
 
 .hmTimeFrameDiv {
-    float: left;
+    flex: 1;
     min-width: 100px;
     width: 10%;
     padding-left: 2%;
@@ -95,20 +95,19 @@ $background-color:grey;
 }
 
 .cmpFrameDiv {
-    float: left;
+    flex: 1;
     min-width: 100px;
     width: 10%;
     padding-left: 2%;
     text-align: center;
 }
 .cmpFirstPeriod {
-    float: left;
+    flex: 1;
     min-width: 100px;
-    margin: 0 20px;
 }
 
 .cmpSecondPeriod {
-    float: left;
+    flex: 1;
     min-width: 100px;
 }
 
@@ -119,7 +118,7 @@ $background-color:grey;
 }
 
 .frameBtn {
-    width: 100%;
+    width: 70%;
     height: 20px;
     font-size: 0.9em;
 }
