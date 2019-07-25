@@ -28,12 +28,27 @@ export async function getRobotStates(id: number, page: number = 1, results: Robo
         })
 
         res.data.results.forEach((robot: any) => {
-            if (!results[robot.id]) {
-                results[robot.id] = {
-                    id: robot.id,
+            if (!results[robot.name]) {
+                results[robot.name] = {
+                    name: robot.name,
                     status: statusFromLocalization(robot.status, robot.localized),
                     pose: { x: 0, y: 0, theta: 0 }
                 }
+            }
+        })
+
+
+        let statesRes = await axios.get(`http://${DEV_INSTANCE}/api/v1/maps/${id}/robots/states/?page=${page}`, {
+            headers: { 'Authorization': DEV_TOKEN },
+        })
+        statesRes.data.results.forEach((robot: any) => {
+            if (results[robot.robot]) {
+                results[robot.robot].pose = robot.current_pose
+                RobotStatePositionCache.updatePositionForRobot(
+                    robot.robot,
+                    robot.current_pose,
+                    performance.now(),
+                )
             }
         })
 
@@ -54,7 +69,6 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
 
     async componentDidMount() {
         this.setState({ robots: await getRobotStates(DEV_MAP_ID) })
-        
 
         // TODO: Determine map from route
         // TODO: Move websocket logic to its own component?
@@ -77,12 +91,12 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
     handleWSMessage = (ev: MessageEvent) => {
         let obj = JSON.parse(ev.data)
         let data = obj.payload.data
-        let robot = this.state.robots[data.id]
+        let robot = this.state.robots[data.robot]
 
         // Initialize robot if a new one pops up
         if (!robot) {
             robot = {
-                id: data.id,
+                name: data.robot,
                 status: RobotStatus.Idle,
                 pose: { x: 0, y: 0, theta: 0 }
             }
@@ -94,7 +108,7 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
             updatedRobot.pose = data.current_pose
             const timestamp = performance.now()
             RobotStatePositionCache.updatePositionForRobot(
-                updatedRobot.id,
+                updatedRobot.name,
                 updatedRobot.pose,
                 timestamp,
             )
@@ -105,7 +119,7 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
         this.setState(prevState => ({
             robots: {
                 ...prevState.robots,
-                [data.id]: updatedRobot
+                [data.robot]: updatedRobot
             }
         }))
     }

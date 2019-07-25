@@ -29,7 +29,7 @@ export type ChartPoint = {
 }
 
 export type Robot = {
-    id: string
+    name: string
     pose: Pose
     status: RobotStatus
 }
@@ -39,7 +39,8 @@ export enum RobotStatus {
     Idle = "IDLE",
     Working = "WORKING",
     Mislocalized = "MISLOCALIZED",
-    Error = "ERROR"
+    Error = "ERROR",
+    Stopped = "RUNSTOP"
 }
 
 export type Pose = {
@@ -54,5 +55,5 @@ export type PoseAtTime = {
 }
 
 export type RobotMap = {
-    [id: string]: Robot
+    [name: string]: Robot
 }

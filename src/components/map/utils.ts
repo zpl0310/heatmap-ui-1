@@ -11,6 +11,7 @@ export const statusFromLocalization = (status: RobotStatus, localized: boolean) 
     // Offline/error takes precedence over mislocalization?
     if (status !== RobotStatus.Offline &&
         status !== RobotStatus.Error &&
+        status !== RobotStatus.Stopped &&
         localized === false) {
         return RobotStatus.Mislocalized
     } else {

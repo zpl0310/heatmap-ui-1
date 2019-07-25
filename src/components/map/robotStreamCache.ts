@@ -42,10 +42,10 @@ export function getPoseFromTimestampPair(now: number, before?: PoseAtTime, after
 }
 
 /**
- * This class should be used as a singleton, and provide two things:
+ * This class should be used as a singleton, and provnamee two things:
  * 1 - A central store for robot positions.
- * 2 - Interpolating a robot's position using a provided timestamp to provide data at an arbitrary rate, despite actual
- *      data being rate-limited (e.g. 60 Hz updates when updates provided at 10 Hz
+ * 2 - Interpolating a robot's position using a provnameed timestamp to provnamee data at an arbitrary rate, despite actual
+ *      data being rate-limited (e.g. 60 Hz updates when updates provnameed at 10 Hz
  */
 type RobotStore = { [key: string]: DequeChangeBuffer }
 export class RobotPositionsCache {
@@ -57,24 +57,24 @@ export class RobotPositionsCache {
 
     // NOTE: In JS, default args are evaluated at call time
     updatePositionForRobot = (
-        id: string,
+        name: string,
         pose: Pose,
         time: number = performance.now(),
     ) => {
-        if (!this.store[id]) {
+        if (!this.store[name]) {
             // NOTE: Minimum size of this buffer should be interpolation delay * robot state update rate.
             // For 200ms interpolation delay, this is 2 (0.2 * 10). 3 or higher should be safe.
-            this.store[id] = new DequeChangeBuffer(5)
+            this.store[name] = new DequeChangeBuffer(5)
         }
 
         // double-precision (64-bit) required if using DOMHighResTimeStamp; otherwise single-precision will suffice
         // NOTE: technically incorrect to use UI's timestamp. Convert message timestamp in future if problematic
         const value: PoseAtTime = { pose, time }
-        this.store[id].push(value)
+        this.store[name].push(value)
     }
 
-    getPositionForRobot = (id: string, time: number): Pose => {
-        const robotBuffer = this.store[id]
+    getPositionForRobot = (name: string, time: number): Pose => {
+        const robotBuffer = this.store[name]
         if (!robotBuffer) {
             return { x: 0, y: 0, theta: 0 }
         }
@@ -85,11 +85,11 @@ export class RobotPositionsCache {
 
     /**
      * Get the latest known position for a given robot, disregarding interpolation factors
-     * @param {string} id The id of the robot
+     * @param {string} name The name of the robot
      * @returns {Pose} An object whose elements are x [m], y [m], and theta [rad]
      */
-    getLatestPositionForRobot = (id: string): Pose => {
-        const robotBuffer = this.store[id]
+    getLatestPositionForRobot = (name: string): Pose => {
+        const robotBuffer = this.store[name]
         if (!robotBuffer) {
             return { x: 0, y: 0, theta: 0 }
         }
