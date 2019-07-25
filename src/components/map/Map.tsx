@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { Component, RefObject } from 'react'
-import { Application, Container, Loader, Sprite, TextureLoader } from 'pixi.js'
+import { Application, Container, Loader, Sprite, TextureLoader, Texture } from 'pixi.js'
 import { Viewport } from 'pixi-viewport'
+import h337 from 'heatmap.js'
 
 import { CENTER_ANCHOR, MAX_FPS, DEV_MAP_ID, MAP_PIXEL_RATIO } from './constants'
 import '../../assets/styles/heatmap.scss'
@@ -115,6 +116,32 @@ class Map extends Component<MapProps, {}> {
 
         this.application.start()
 
+        // Heatmap setup
+        let instance = h337.create({
+            container: document.querySelector('#fetch-map-container')! as HTMLElement,
+            maxOpacity: 0.2,
+            /*gradient: {
+                0: '#8888ff',
+                1: '#0000ff'
+            }*/
+        })
+        let fakeData = []
+        for (let i = 0; i < 1000; i++) {
+            let x = Math.floor(Math.random() * this.map.image.width)
+            let y = Math.floor(Math.random() * this.map.image.height)
+            fakeData.push({x, y, value: Math.pow(1 - Math.abs(0.5 * x - y) / this.map.image.width, 3)})
+        }
+
+        instance.setData({
+            max: 1,
+            min: 0,
+            data: fakeData
+        })
+
+        let hmTex = Texture.from(instance.getDataURL())
+        let hmSprite = new Sprite(hmTex)
+        this.world.addChild(hmSprite)
+
         if (this.props.showRobots) {
             if (!this.props.robots) {
                 throw new Error("No robots provided to display")
@@ -139,6 +166,7 @@ class Map extends Component<MapProps, {}> {
                 data-cy="fetch-map-container"
                 ref={this.parentContainer}
             >
+                <div id="heatmap-container"></div>
                 <canvas
                     id="renderer"
                     data-cy="fetch-map-canvas"
