@@ -91,12 +91,13 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
     handleWSMessage = (ev: MessageEvent) => {
         let obj = JSON.parse(ev.data)
         let data = obj.payload.data
-        let robot = this.state.robots[data.robot]
+        let name = data.robot || data.name
+        let robot = this.state.robots[name]
 
         // Initialize robot if a new one pops up
         if (!robot) {
             robot = {
-                name: data.robot,
+                name,
                 status: RobotStatus.Idle,
                 pose: { x: 0, y: 0, theta: 0 }
             }
