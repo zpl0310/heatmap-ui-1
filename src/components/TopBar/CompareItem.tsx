@@ -22,36 +22,48 @@ class CompareItem extends React.Component<CompareItemProps, CompareItemState> {
         }
     }
 
-    handleChange =( date: Date) => {
+    handleFirstDateChange =( date: Date) => {
         this.setState({
             firstDate: date
+        });
+    }
+
+    handleSecondDateChange =( date: Date) => {
+        this.setState({
+            secondDate: date
         });
     }
 
     render() { 
         return ( 
             <div className="topMid">
-                <div>
-                    <TimeFrame 
-                        label="Time Frame"
-                        selection={["1","2","3"]}
-                    />
-                </div>
-                <div>
-                    <DatePicker
-                        selected={this.state.firstDate}
-                        onChange={this.handleChange}
-                        maxDate={new Date()}
-                        showYearDropdown={true}
-                    />
-                </div>
-                <div>
-                    <DatePicker
-                        selected={this.state.firstDate}
-                        onChange={this.handleChange}
-                        maxDate={new Date()}
-                        showYearDropdown={true}
-                    />
+                <div className="topMidMid">
+                    <div className="cmpFrameDiv">
+                        <TimeFrame 
+                            label="Time Frame"
+                            selection={["1","2","3"]}
+                        />
+                    </div>
+                    <div className="cmpFirstPeriod">
+                        <label className="frameLabel"> First Period </label>
+                        <br className="clear" />
+                        <DatePicker
+                            selected={this.state.firstDate}
+                            onChange={this.handleFirstDateChange}
+                            maxDate={new Date()}
+                            showYearDropdown={true}
+                        />
+                    </div>
+                    <div className="cmpSecondPeriod">
+                        <label className="frameLabel"> Second Period </label>
+                        <br className="clear" />
+                        <DatePicker
+                            selected={this.state.secondDate}
+                            onChange={this.handleSecondDateChange}
+                            maxDate={new Date()}
+                            showYearDropdown={true}
+                        />
+                    </div>
                 </div>
             </div>
         );
