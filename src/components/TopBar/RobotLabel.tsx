@@ -23,7 +23,8 @@ class RobotLabel extends React.Component<RobotLabelProps, RobotLabelState> {
                 <div className="numML">
                     <label className="num"> {numML} </label>
                     <br className="clear" />
-                    <label> Mislocalizations per Day </label>
+                    <label> Mislocalizations</label>
+                    <label> per day</label>
                 </div>
             </div>
         );
