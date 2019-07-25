@@ -5,17 +5,18 @@ import { getMapImage } from './getMapImage';
 
 // TODO: Move to a Redux action and store in state
 export async function getMapInfo(id: number) {
-    return axios.get(`http://${DEV_INSTANCE}/api/v1/maps/${id}/`, {
-        headers: { 'Authorization': DEV_TOKEN }
-    }).then(async (res: AxiosResponse) => {
+    try {
+        let res = await axios.get(`http://${DEV_INSTANCE}/api/v1/maps/${id}/`, {
+            headers: { 'Authorization': DEV_TOKEN }
+        })
         let map: MapInfo = {
             ...res.data,
             image: await getMapImage(id)
         }
         return map
-    }).catch((err: Error) => {
-        // TODO: Proper error handling
+    } catch(err) {
+        // TODO: Proper error handling (redux)
         console.log(err)
         return {}
-    })
+    }
 }

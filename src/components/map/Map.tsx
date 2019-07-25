@@ -51,7 +51,7 @@ class Map extends Component<MapProps, {}> {
         Loader.registerPlugin(new TextureLoader())
         Loader.shared
             .add('robot', robot)
-            .add('map', this.map.image.image) // TODO: Unique key per map, grab map from Redux
+            .add('map', this.map.image.src) // TODO: Unique key per map, grab map from Redux
             .load(() => this.startApp())
 
         // Application setup

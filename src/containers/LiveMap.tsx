@@ -6,6 +6,7 @@ import { Robot, RobotStatus, RobotMap } from '../definitions';
 import { RobotStatePositionCache } from '../components/map/robotStreamCache';
 import axios, { AxiosResponse } from 'axios'
 import { DEV_MAP_ID, DEV_TOKEN, DEV_INSTANCE } from '../components/map/constants';
+import { statusFromLocalization } from '../components/map/utils';
 
 type LiveMapProps = {
 }
@@ -21,14 +22,16 @@ const initialState = {
 // Fetches all initial robot states, recursing to cover each page
 // TODO: Move to a Redux action and store in state
 export async function getRobotStates(id: number, page: number = 1, results: RobotMap = {}): Promise<RobotMap> {
-    return axios.get(`http://${DEV_INSTANCE}/api/v1/maps/${id}/robots/?page=${page}`, {
-        headers: { 'Authorization': DEV_TOKEN },
-    }).then((res: AxiosResponse) => {
-        res.data.results.forEach((robot: Robot) => {
+    try {
+        let res = await axios.get(`http://${DEV_INSTANCE}/api/v1/maps/${id}/robots/?page=${page}`, {
+            headers: { 'Authorization': DEV_TOKEN },
+        })
+
+        res.data.results.forEach((robot: any) => {
             if (!results[robot.id]) {
                 results[robot.id] = {
                     id: robot.id,
-                    status: robot.status,
+                    status: statusFromLocalization(robot.status, robot.localized),
                     pose: { x: 0, y: 0, theta: 0 }
                 }
             }
@@ -37,12 +40,13 @@ export async function getRobotStates(id: number, page: number = 1, results: Robo
         if (res.data.next) {
             return getRobotStates(id, page + 1, results)
         }
+
         return results
-    }).catch((err: Error) => {
-        // TODO: Proper error handling
+    } catch(err) {
+        // TODO: Proper error handling (redux)
         console.log(err)
         return {}
-    })
+    }
 }
 class LiveMap extends Component<LiveMapProps, LiveMapState> {
     private ws!: WebSocket
@@ -50,6 +54,7 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
 
     async componentDidMount() {
         this.setState({ robots: await getRobotStates(DEV_MAP_ID) })
+        
 
         // TODO: Determine map from route
         // TODO: Move websocket logic to its own component?
@@ -94,14 +99,7 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
                 timestamp,
             )
         } else if (obj.stream === 'robots') {
-            // Offline/error takes precedence over mislocalization?
-            if (data.status !== RobotStatus.Offline &&
-                data.status !== RobotStatus.Error &&
-                data.localized === false) {
-                updatedRobot.status = RobotStatus.Mislocalized
-            } else {
-                updatedRobot.status = data.status
-            }
+            updatedRobot.status = statusFromLocalization(data.status, data.localized)
         }
 
         this.setState(prevState => ({
