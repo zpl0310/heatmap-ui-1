@@ -1,7 +1,7 @@
 import { Container } from 'pixi.js'
 import RobotSprite from './Robot'
 import { DEFAULT_SCALE, INTERPOLATION_DELAY } from './constants';
-import { RobotMap } from '../../definitions';
+import { RobotMap, RobotStatus } from '../../definitions';
 import { RobotStatePositionCache } from './robotStreamCache';
 
 
@@ -17,8 +17,7 @@ export default class RobotLayer extends Container {
         this.removeChildren()
         if (robots) {
             for (let robot of Object.values(robots)) {
-                const pose = RobotStatePositionCache.getPositionForRobot(robot.id, delayedTimestamp)
-
+                const pose = RobotStatePositionCache.getPositionForRobot(robot.name, delayedTimestamp)
                 if (pose.x !== 0 && pose.y !== 0 && pose.theta !== 0) {
                     const sprite = new RobotSprite(pose, robot.status)
                     this.addChild(sprite)

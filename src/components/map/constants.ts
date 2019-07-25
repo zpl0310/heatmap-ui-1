@@ -20,5 +20,6 @@ export const STATUS_COLORS = {
     [RobotStatus.Idle]: 0x00AAFF,
     [RobotStatus.Mislocalized]: 0xFFAA00,
     [RobotStatus.Offline]: 0x666666,
-    [RobotStatus.Error]: 0xFF0000
+    [RobotStatus.Error]: 0xFF0000,
+    [RobotStatus.Stopped]: 0xFF0000
 }
