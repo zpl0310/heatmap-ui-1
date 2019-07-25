@@ -1,4 +1,4 @@
-import { Loader, Sprite, Circle, Graphics } from 'pixi.js'
+import { Loader, Sprite, Graphics } from 'pixi.js'
 import { CENTER_ANCHOR, ROBOT_SIZE, MAP_PIXEL_RATIO, STATUS_COLORS } from './constants';
 import { Pose, RobotStatus } from '../../definitions'
 

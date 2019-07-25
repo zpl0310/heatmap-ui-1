@@ -29,7 +29,7 @@ export async function getRobotStates(id: number, page: number = 1, results: Robo
                 results[robot.id] = {
                     id: robot.id,
                     status: robot.status,
-                    pose: {x: 0, y: 0, theta: 0}
+                    pose: { x: 0, y: 0, theta: 0 }
                 }
             }
         })
@@ -94,7 +94,14 @@ class LiveMap extends Component<LiveMapProps, LiveMapState> {
                 timestamp,
             )
         } else if (obj.stream === 'robots') {
-            updatedRobot.status = data.status
+            // Offline/error takes precedence over mislocalization?
+            if (data.status !== RobotStatus.Offline &&
+                data.status !== RobotStatus.Error &&
+                data.localized === false) {
+                updatedRobot.status = RobotStatus.Mislocalized
+            } else {
+                updatedRobot.status = data.status
+            }
         }
 
         this.setState(prevState => ({

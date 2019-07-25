@@ -1,8 +1,7 @@
 import { Container } from 'pixi.js'
 import RobotSprite from './Robot'
 import { DEFAULT_SCALE, INTERPOLATION_DELAY } from './constants';
-import { Pose, PoseAtTime, RobotMap } from '../../definitions';
-import DequeChangeBuffer from './changeBuffer';
+import { RobotMap } from '../../definitions';
 import { RobotStatePositionCache } from './robotStreamCache';
 
 
