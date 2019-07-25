@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Component } from 'react';
 import '../assets/styles/heatmap.scss';
 import Map from '../components/map/Map';
-import { Robot, RobotStatus, RobotMap } from '../definitions';
+import { RobotStatus, RobotMap } from '../definitions';
 import { RobotStatePositionCache } from '../components/map/robotStreamCache';
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { DEV_MAP_ID, DEV_TOKEN, DEV_INSTANCE } from '../components/map/constants';
 import { statusFromLocalization } from '../components/map/utils';
 

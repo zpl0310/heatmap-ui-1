@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { MapImage } from '../../definitions'
 import { DEV_TOKEN, DEV_INSTANCE } from './constants';
 
