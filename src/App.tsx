@@ -15,7 +15,7 @@ class App extends React.Component<{}, {}> {
   render() { 
     return (
       <Provider store={store}>
-        <div>
+        <div className="container">
           <div className="leftSide">
             <SideBar />
           </div>

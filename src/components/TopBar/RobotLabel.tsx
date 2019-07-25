@@ -14,13 +14,15 @@ class RobotLabel extends React.Component<RobotLabelProps, RobotLabelState> {
     render() { 
         const { numRobot, numML } = this.props
         return ( 
-            <div>
-                <div>
-                    <label> {numRobot} </label>
+            <div className="labelContainer">
+                <div className="numRobot">
+                    <label className="num"> {numRobot} </label>
+                    <br className="clear" />
                     <label> Robots </label>
                 </div>
-                <div>
-                    <label> {numML} </label>
+                <div className="numML">
+                    <label className="num"> {numML} </label>
+                    <br className="clear" />
                     <label> Mislocalizations per Day </label>
                 </div>
             </div>
