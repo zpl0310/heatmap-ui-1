@@ -60,7 +60,6 @@ class TimeFrame extends React.Component<TimeFrameProps, TimeFrameState> {
             )
         }
 
-
         return (
             <div>
                 <div>

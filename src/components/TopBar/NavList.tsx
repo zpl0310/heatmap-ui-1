@@ -2,7 +2,7 @@ import * as React from 'react';
 import NavListItem from './NavListItem'
 
 export interface NavListProps {
-    
+    onNavChange: Function
 }
  
 export interface NavListState {
@@ -24,7 +24,8 @@ class NavList extends React.Component<NavListProps, NavListState> {
                 className="navsWrapper"
                 key={name}
             >
-                <NavListItem   
+                <NavListItem 
+                    onNavChange={this.props.onNavChange}
                     name={name}
                 />
             </div>
