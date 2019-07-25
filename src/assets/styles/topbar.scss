@@ -1,50 +1,57 @@
 $blue-color:#4681b8;
 $divider-color:#f7f7f7;
+$background-color:grey;
 
 .topBar {
-    margin-top: 0;
     min-width: 800px;
-    height: 10%;
+    min-height: 74px;
+    
 }
 
 .topLeft {
     float: left;
+    width: 18%;
     min-width: 100px;
     color: $blue-color;
     font-weight: bold;
     font-size: 2.5em;
     height: 30%;
     padding-top: 1.5%;
-    padding-left: 8%;
+    padding-left: 5%;
+    padding-right: 1%;
+    border-right: 2px solid $divider-color;
+
 }
 
 .topMid {
-    min-width: 200px;
+    min-width: 400px;
     float: left;
+    width: 35%;
 }
 
 .topRight {
     float: right;
-    height: 100%;
+    min-width: 200px;
+    width: 30%;
+    border-left: 2px solid $divider-color;
+   
 }
 
 .clear {
     clear: left;
-    clear: right;
 }
 
 .navs {
-    width: 150px;
-    font-size: 1.2em;
+    min-width: 75px;
+    font-size: 1em;
     height: 20px;
     text-align: center;
-    padding-top:1%;
-    padding-bottom: 1%;
+    padding-top:45%;
+    padding-bottom: 45%;
 }
 
 .navsWrapper {
     float:left;
-    height: 100%;
 }
 
 .navsWrapper:hover {   
@@ -56,6 +63,38 @@ $divider-color:#f7f7f7;
 
 .navs:hover {
     cursor: pointer;
+}
+
+.hmTimeFrameDiv {
+    float: left;
+    min-width: 100px;
+    width: 10%;
+    color: $blue-color;
+    font-size: 1em;
+    padding-left: 2%;
+}
+
+.labelContainer {
+    float: left;
+    min-width: 210px;
+}
+
+.numRobot {
+    float: left;
+    text-align: center;
+    min-width: 100px;
+}
+
+.numML {
+    float: left;
+    text-align: center;
+    min-width: 100px;
+}
+
+.num {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: $blue-color;
 }
 
 

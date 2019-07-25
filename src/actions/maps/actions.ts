@@ -6,6 +6,7 @@ import { LOAD_MAPS,
         START_MAP_LOADING,
         MapAction,
         CLEAR_CURMAP,
+        LOAD_CUR_MAP,
  } from '.'
 import { AppState } from '../../store'
 
@@ -22,35 +23,37 @@ export const clearCurMap = (): MapAction => ({
 })
 
 // *** might need to change after api set up
-// export const loadMaps = (id: string) => async (dispatch: ThunkDispatch<AppState, undefined, MapAction>) => {
-//     dispatch({ type: START_MAP_LOADING })
+export const loadMaps = (id: string) => async (dispatch: ThunkDispatch<AppState, undefined, MapAction>) => {
+    dispatch({ type: START_MAP_LOADING })
 
-//     try {
-//         const res: AxiosResponse = await axios.get('api/instances/{id}/maps', {
-//             // might need it later
-//             // headers: {
-//             //     'Token': token
-//             // }
-//         })
-//          *** might need to change 
-//         let maps = res.data.map((map: any): Map => ({
-//             id: map.id,
-//             name: map.name,
-//             imgae: map.image || null
-//         }))
+    try {
+        const res: AxiosResponse = await axios.get('api/instances/{id}/maps', {
+            // might need it later
+            // headers: {
+            //     'Token': token
+            // }
+        })
+     
+        let maps = res.data.map((map: Map): Map => ({
+            id: map.id,
+            name: map.name,
+            image: null,
+        }))
 
-//         dispatch({ type: LOAD_MAPS, maps })
+        dispatch({ type: LOAD_MAPS, maps })
 
-//     } catch(err) {
-//         dispatch({ type: FAIL_MAP_LOADING, message: 'Failed to fetch maps: ' + err })
-//     }
+    } catch(err) {
+        dispatch({ type: FAIL_MAP_LOADING, message: 'Failed to fetch maps: ' + err })
+    }
+    dispatch({ type: STOP_MAP_LOADING, })
+}
 
+export const loadCurMap = (mapURL: string) => {
+    //TODO
+}
 
-//     dispatch({ type: STOP_Map_LOADING, })
-// }
-
-export const loadmaps = (maps: Map[]): MapAction => ({
-    type: LOAD_MAPS,
-    maps
-})
+// export const loadMaps = (maps: Map[]): MapAction => ({
+//     type: LOAD_MAPS,
+//     maps
+// })
 

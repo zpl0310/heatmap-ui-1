@@ -14,7 +14,8 @@ type TopBarProps = {
 
 type TopBarState = {
     //need to get from redux store
-    curNav: string
+    curNav: string,
+    disabled: boolean,
 }
 
 export interface OwnProps {
@@ -29,41 +30,48 @@ class TopBar extends Component<Props, TopBarState> {
         super(props);
         this.state = {
             curNav: "History",
+            disabled: true,
         }
+    }
+
+    onNavChange = (s: string) => {
+        this.setState({
+            curNav: s
+        })
+        console.log(this.state.curNav)
     }
 
     render() {
         const {curNav} = this.state
-        let display = (
-            <div className="topMid"> 
-                <CompareItem />
-            </div>
-        )
-        // let display=(<div className="topMid"/>)
-        // if (curNav==="Heatmap") {
-        //     display = (
-        //         <div className="topMid">         
-        //             <HeatMapItem />
-        //         </div>
-        //     )
-        // } else if (curNav==="CompareMap") {
-        //     display = (
-        //         <div className="topMid"> 
-        //             <CompareItem />
-        //         </div>
-        //     )
-        // }
+        let display=(<div className="topMid"/>)
+        if (curNav==="Heatmap") {
+            display = (            
+                <HeatMapItem />           
+            )
+        } else if (curNav==="Compare") {
+            display = (          
+                <CompareItem />   
+            )
+        }
+
+        let topbar = (<div className="topBar" />)
+        if (this.props.maps.current!=="") {
+            topbar = (
+                <div >
+                    <div className="topLeft">
+                        <label>{this.props.maps.current}</label>
+                    </div>
+                    {display}            
+                    <NavList 
+                        onNavChange={this.onNavChange}
+                    />           
+                    <br className="clear" />
+                </div>
+            )
+        }
         return (
             <div className="topBar">
-                <div className="topLeft">
-                    <label>{this.props.maps.current}</label>
-                </div>
-                <br className="clear" />
-                {display}
-                
-                <NavList />
-                
-                <br className="clear" />
+                {topbar}
             </div>
         );
     }
