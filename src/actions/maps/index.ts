@@ -29,7 +29,7 @@ type LoadMapsAction = {
 
 type ChangeMapAction = {
     type: typeof CHANGE_MAP
-    mapName: string
+    id: string
 }
 
 type ClearCurMap = {

@@ -16,7 +16,7 @@ const initial: HeatMapStoreState = {
     loading: false,
 	error: "",
     points: [],
-	robots: [],
+	robots: {},
 	Interval: 1,
 }
 

@@ -6,25 +6,25 @@ export interface InstanceListItemProps {
     changeSidebarView: Function
     onChangeInstance: Function
 }
- 
+
 export interface InstanceListItemState {
-    
+
 }
- 
+
 class InstanceListItem extends React.Component<InstanceListItemProps, InstanceListItemState> {
     // constructor(props: InstanceListItemProps) {
     //     super(props);
     // }
-    handleClick =() => {
+    handleClick = () => {
         this.props.changeSidebarView()
-        this.props.onChangeInstance(this.props.name) 
+        this.props.onChangeInstance(this.props.name)
     }
-    render() { 
-    
-        return (  
-            <li 
-                onClick = {this.handleClick}
-            >   
+    render() {
+
+        return (
+            <li
+                onClick={this.handleClick}
+            >
                 <div>
                     {this.props.name}
                 </div>
@@ -32,5 +32,5 @@ class InstanceListItem extends React.Component<InstanceListItemProps, InstanceLi
         );
     }
 }
- 
+
 export default InstanceListItem;

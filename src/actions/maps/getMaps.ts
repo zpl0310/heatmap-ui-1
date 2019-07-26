@@ -8,16 +8,17 @@ export async function getMaps(instance: string, page: number = 1, results: MapIn
             headers: { 'Authorization': DEV_TOKEN },
         })
         
-        res.data.results.forEach(async (map: MapInfo) => {
+        for (let map of res.data.results) {
+            let image = await getMapImage(map.id) as MapImage
             const info: MapInfo = {
                 id: map.id,
                 name: map.name,
                 x: map.x,
                 y: map.y,
-                image: await getMapImage(map.id) as MapImage
+                image
             }
             results.push(info)
-        })
+        }
 
         if (res.data.next) {
             return getMaps(instance, page + 1, results)

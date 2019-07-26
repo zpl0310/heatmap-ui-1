@@ -1,54 +1,46 @@
 import * as React from 'react';
 import MapListItem from './MapListItem';
 import '../../assets/styles/sidebar.scss';
+import { MapInfo } from '../../definitions';
 //import back from '../assets/back.png';
 declare var require: any
 const back = require('../../assets/back1.svg') as string;
 
 export interface MapListProps {
     curInstance: string,
-    curMap:string,
+    curMap: string,
     changeSidebarView: Function,
     onChangeMap: Function,
     onClearCurMap: Function,
+    mapList: MapInfo[]
 }
- 
-export interface MapListState {
-    mapNameList: string[]
-}
- 
-class MapList extends React.Component<MapListProps, MapListState> {
-    constructor(props: MapListProps) {
-        super(props); 
-        this.state = ({
-            mapNameList: ["a's map","b's map","c's map"],
-        })     
-    }
 
+export interface MapListState {
+}
+
+class MapList extends React.Component<MapListProps, MapListState> {
     handleClick = () => {
         this.props.changeSidebarView()
         this.props.onClearCurMap()
     }
- 
-    render() { 
-        const { mapNameList } = this.state
+
+    render() {
         const { curMap, curInstance } = this.props
-
-
-        const mapList = mapNameList.map((name)=>(
-            <MapListItem 
-                key={name}
-                name={name}
+        const mapList = this.props.mapList.map((map) => (
+            <MapListItem
+                key={map.id}
+                name={map.name}
                 curMap={curMap}
                 onChangeMap={this.props.onChangeMap}
             />
-        )) 
+        ))
+        
         return (
-            <div> 
+            <div>
                 <div className="backDiv">
                     <div className="backMidDiv">
-                        <span className="backButton"><img src={back} alt="back" onClick={this.handleClick}/> </span>
-                        <label className="curInstanceLabel">  {curInstance}</label>
+                        <span className="backButton"><img src={back} alt="back" onClick={this.handleClick} /> </span>
+                        <label className="curInstanceLabel">{curInstance}</label>
                     </div>
                 </div>
                 <ul className="list">{mapList}</ul>
@@ -56,5 +48,5 @@ class MapList extends React.Component<MapListProps, MapListState> {
         );
     }
 }
- 
+
 export default MapList;

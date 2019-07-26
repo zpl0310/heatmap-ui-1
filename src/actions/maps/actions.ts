@@ -14,11 +14,11 @@ import { AppState } from '../../store'
 import { ThunkDispatch } from 'redux-thunk'
 import axios, { AxiosResponse } from 'axios'
 import { DEV_INSTANCE, DEV_TOKEN } from '../../components/map/constants';
-import { getMapImage, getMaps } from './getMaps';
+import { getMaps } from './getMaps';
 
-export const changeMap = (mapName: string): MapAction => ({
+export const changeMap = (id: string): MapAction => ({
     type: CHANGE_MAP,
-    mapName
+    id
 })
 
 export const clearCurMap = (): MapAction => ({
@@ -28,10 +28,9 @@ export const clearCurMap = (): MapAction => ({
 // *** might need to change after api set up
 export const loadMaps = (id: string) => async (dispatch: ThunkDispatch<AppState, undefined, MapAction>) => {
     dispatch({ type: START_MAP_LOADING })
-
+    
     try {
-        let maps: MapInfo[] = []
-        await getMaps(DEV_INSTANCE, 1, maps)
+        let maps = await getMaps(DEV_INSTANCE, 1, [])
         dispatch({ type: LOAD_MAPS, maps })
     } catch (err) {
         dispatch({ type: FAIL_MAP_LOADING, message: 'Failed to fetch maps: ' + err })
