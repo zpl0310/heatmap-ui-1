@@ -10,6 +10,7 @@ export const dispatchActions = (dispatch: ThunkDispatch<AppState, undefined, App
     return {
         onChangeInstance: (instanceName: string) => {
             dispatch(instanceActions.changeInstance(instanceName))
+            dispatch(mapActions.loadMaps(instanceName))
         },
         onChangeMap: (mapName: string) => {
             dispatch(mapActions.changeMap(mapName))

@@ -1,22 +1,25 @@
-import { MapInfo } from '../../definitions'
-import { LOAD_MAPS,
-        CHANGE_MAP, 
-        FAIL_MAP_LOADING,
-        STOP_MAP_LOADING,
-        START_MAP_LOADING,
-        MapAction,
-        CLEAR_CURMAP,
-        LOAD_CUR_MAP,
- } from '.'
+import { MapInfo, MapImage } from '../../definitions'
+import {
+    LOAD_MAPS,
+    CHANGE_MAP,
+    FAIL_MAP_LOADING,
+    STOP_MAP_LOADING,
+    START_MAP_LOADING,
+    MapAction,
+    CLEAR_CURMAP,
+    LOAD_CUR_MAP,
+} from '.'
 import { AppState } from '../../store'
 
 import { ThunkDispatch } from 'redux-thunk'
 import axios, { AxiosResponse } from 'axios'
+import { DEV_INSTANCE, DEV_TOKEN } from '../../components/map/constants';
+import { getMapImage, getMaps } from './getMaps';
 
 export const changeMap = (mapName: string): MapAction => ({
     type: CHANGE_MAP,
     mapName
-}) 
+})
 
 export const clearCurMap = (): MapAction => ({
     type: CLEAR_CURMAP
@@ -27,24 +30,10 @@ export const loadMaps = (id: string) => async (dispatch: ThunkDispatch<AppState,
     dispatch({ type: START_MAP_LOADING })
 
     try {
-        const res: AxiosResponse = await axios.get('api/instances/{id}/maps', {
-            // might need it later
-            // headers: {
-            //     'Token': token
-            // }
-        })
-     
-        let maps = res.data.map((map: MapInfo): MapInfo => ({
-            id: map.id,
-            name: map.name,
-            x: map.x,
-            y: map.y,
-            image: {width: 0, height: 0, src: ''},
-        }))
-
+        let maps: MapInfo[] = []
+        await getMaps(DEV_INSTANCE, 1, maps)
         dispatch({ type: LOAD_MAPS, maps })
-
-    } catch(err) {
+    } catch (err) {
         dispatch({ type: FAIL_MAP_LOADING, message: 'Failed to fetch maps: ' + err })
     }
     dispatch({ type: STOP_MAP_LOADING, })

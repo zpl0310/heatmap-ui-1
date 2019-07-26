@@ -21,7 +21,7 @@ const initialState = {
 
 // Fetches all initial robot states, recursing to cover each page
 // TODO: Move to a Redux action and store in state
-export async function getRobotStates(id: number, page: number = 1, results: RobotMap = {}): Promise<RobotMap> {
+export async function getRobotStates(id: string, page: number = 1, results: RobotMap = {}): Promise<RobotMap> {
     try {
         let res = await axios.get(`http://${DEV_INSTANCE}/api/v1/maps/${id}/robots/?page=${page}`, {
             headers: { 'Authorization': DEV_TOKEN },
