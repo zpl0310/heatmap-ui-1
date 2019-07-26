@@ -72,10 +72,27 @@ $background-color:grey;
 
 .navsWrapper:hover {   
     color: $blue-color;
-    background-color: $divider-color;
+    background-color: $divider-color;  
     transition: background-color 0.3s ease;
     border-bottom: 3px solid $blue-color;
 }
+
+/*
+.navsWrapper:after {
+    content: '';
+    display: block;
+    border-bottom: 3px solid red;
+    width: 0;
+    position: absolute;
+    right: 0;
+    -webkit-transition: 1s ease;
+    transition: 1s ease;
+}
+
+.navsWrapper:hover:after { 
+    width: 10em; 
+}  
+*/
 
 .navs:hover {
     cursor: pointer;
@@ -104,11 +121,15 @@ $background-color:grey;
 .cmpFirstPeriod {
     flex: 1;
     min-width: 100px;
+
+    text-align: center;
+    margin-right: 5%;
 }
 
 .cmpSecondPeriod {
     flex: 1;
     min-width: 100px;
+    text-align: center;
 }
 
 .frameLabel {
