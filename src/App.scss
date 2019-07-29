@@ -1,15 +1,28 @@
+$divider-color:#e0e0de;
+
 .container {
     overflow: hidden;
 }
-.leftSide {
-    width: 25%;
-    min-width: 250px;
+
+.bot-side {
+    width: 300px;
     margin-left: 2px;
-    float: left;
-    height: 100vh;
+    height: calc(100vh - 122px);
+    overflow-y: auto;
+}
+
+.bot-main {
+    flex-grow: 1;
+    height: calc(100vh - 122px);
+}
+
+.bot {
+    display: flex;
     overflow-y: hidden;
 }
 
-.rightSide {
+.top {
     overflow: hidden;
+    height: 122px;
+    border-bottom: 2px inset $divider-color;
 }

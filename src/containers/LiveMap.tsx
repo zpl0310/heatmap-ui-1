@@ -96,12 +96,10 @@ class LiveMap extends Component<Props, LiveMapState> {
 
     render() {
         return (
-            <div>
-                <Map
-                    showRobots
-                    robots={this.state.robots}
-                />
-            </div>
+            <Map
+                showRobots
+                robots={this.state.robots}
+            />
         );
     }
 }

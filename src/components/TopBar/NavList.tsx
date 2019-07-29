@@ -18,11 +18,19 @@ class NavList extends React.Component<NavListProps, NavListState> {
         })     
     }
 
+    getClassName = (name: string) => {
+        if (name !== this.props.curNav) return "navsWrapper"
+        return ["navsWrapper","is-active"].join(" ")
+    }
+
     render() { 
         const { itemNames } = this.state
+
+        
+        
         const navList = itemNames.map((name) => (
             <div 
-                className="navsWrapper"
+                className={this.getClassName(name)}
                 key={name}
             >
                 <NavListItem 

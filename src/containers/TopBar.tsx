@@ -9,6 +9,8 @@ import CompareItem from '../components/TopBar/CompareItem';
 import { dispatchActions } from '../store/dispatch';
 import { AppState } from '../store';
 
+const fetchLogo = require("../assets/fetchcore.svg") as string;
+
 type TopBarProps = {
 }
 
@@ -72,6 +74,7 @@ class TopBar extends Component<Props, TopBarState> {
         }
         return (
             <div className="topBar">
+                <img src={fetchLogo} className="fetch-logo" alt="logo" />
                 {topbar}
             </div>
         );

@@ -60,10 +60,15 @@ class SideBar extends Component<Props, SideBarState> {
         }
         return (
             <div className="sideBar">
-                <img src={fetchLogo} className="fetch-logo" alt="logo" />
                 {display}
             </div>
         );
+        // return (
+        //     <div className="sideBar">
+        //         <img src={fetchLogo} className="fetch-logo" alt="logo" />
+        //         {display}
+        //     </div>
+        // );
     }
 }
 
