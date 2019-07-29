@@ -1,28 +1,32 @@
-$divider-color:#e0e0de;
+$divider-color: #e0e0de;
 
 .container {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .bot-side {
-    width: 300px;
-    margin-left: 2px;
-    height: calc(100vh - 122px);
-    overflow-y: auto;
+  width: 300px;
+  min-width: 300px;
+  margin-left: 2px;
+  height: calc(100vh - 122px);
+  overflow-y: auto;
+  float: left;
 }
 
 .bot-main {
-    flex-grow: 1;
-    height: calc(100vh - 122px);
+  position: absolute;
+  left: 302px;
+  width: calc(100vw - 302px);
+  height: calc(100vh - 122px);
+  overflow: hidden;
 }
 
 .bot {
-    display: flex;
-    overflow-y: hidden;
+  overflow: hidden;
 }
 
 .top {
-    overflow: hidden;
-    height: 122px;
-    border-bottom: 2px inset $divider-color;
+  overflow: hidden;
+  height: 122px;
+  border-bottom: 2px inset $divider-color;
 }

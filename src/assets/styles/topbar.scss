@@ -1,187 +1,184 @@
-$blue-color:#4681b8;
-$divider-color:#e0e0de;
-$background-color:grey;
-
+$blue-color: #4681b8;
+$divider-color: #e0e0de;
+$background-color: grey;
 
 .topBar {
-    min-width: 800px;
-    min-height: 122px;
-    display: flex;  
+  min-width: 800px;
+  min-height: 122px;
+  display: flex;
 }
 
 .fetch-logo {
-    margin-right:5px;
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-bottom: 10px;
-    height:122px;
-    width: 250px;
-    //width: 25%;
+  margin-right: 5px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  height: 122px;
+  width: 250px;
+  //width: 25%;
 }
 
 .topBarMid {
-    display: flex;
-    flex-direction: row;
-    width: 75%;
+  display: flex;
+  flex-direction: row;
+  width: 75%;
 }
 
 .topLeft {
-    flex: 1;
-    width: 18%;
-    min-width: 100px;
-    color: $blue-color;
-    font-weight: bold;
-    font-size: 2.5em;
-    //height: 30%;
-    padding-top: 1em;
-    padding-left: 5%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  flex: 1;
+  width: 18%;
+  min-width: 100px;
+  color: $blue-color;
+  font-weight: bold;
+  font-size: 2.5em;
+  //height: 30%;
+  padding-top: 1em;
+  padding-left: 5%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .topMid {
-    padding-top: 2.5em;
-    min-width: 380px;
-    flex: 1;
-    width: 35%;
-    margin: 0 3%;
+  padding-top: 2.5em;
+  min-width: 380px;
+  flex: 1;
+  width: 35%;
+  margin: 0 3%;
 }
 
 .topRight {
-    min-width: 250px;
-    width: 30%;
-    flex: 1;
+  min-width: 250px;
+  width: 30%;
+  flex: 1;
 }
 
 .clear {
-    clear: left;
+  clear: left;
 }
 
 .navs {
-    min-width: 75px;
-    font-size: 1em;
-    height: 20px;
-    text-align: center;
-    padding-top:2.5em;
-    //padding-bottom: 32%;
+  min-width: 75px;
+  font-size: 1em;
+  height: 20px;
+  text-align: center;
+  padding-top: 2.5em;
+  //padding-bottom: 32%;
 }
 
 .curNav {
-    font-weight: bold;
-    color: $blue-color;
-    //border-bottom: 3px solid $blue-color;
-    min-width: 75px;
-    height: 20px;
-    text-align: center;
-    padding-top:2.5em;
-    //padding-bottom: 32%;
+  font-weight: bold;
+  color: $blue-color;
+  //border-bottom: 3px solid $blue-color;
+  min-width: 75px;
+  height: 20px;
+  text-align: center;
+  padding-top: 2.5em;
+  //padding-bottom: 32%;
 }
 
 .topRightMid {
-    display: flex;
-    flex-direction: row;
-    position: relative;
+  display: flex;
+  flex-direction: row;
+  position: relative;
 }
 .navsWrapper {
-    flex: 1;
-    height: 110px;
+  flex: 1;
+  height: 110px;
 }
 
-.navsWrapper:hover {   
-    color: $blue-color;
-    background-color: $divider-color;  
-    cursor: pointer;
-    transition: background-color 0.5s ease;
-    //border-bottom: 3px solid $blue-color;
+.navsWrapper:hover {
+  color: $blue-color;
+  background-color: $divider-color;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  //border-bottom: 3px solid $blue-color;
 }
 
 .navs:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .topMidMid {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .hmTimeFrameDiv {
-    flex: 1;
-    min-width: 100px;
-    width: 10%;
-    padding-left: 2%;
-    text-align: center;
+  flex: 1;
+  min-width: 100px;
+  width: 10%;
+  padding-left: 2%;
+  text-align: center;
 }
 
 .cmpFrameDiv {
-    flex: 1;
-    min-width: 100px;
-    width: 10%;
-    padding-left: 2%;
-    text-align: center;
+  flex: 1;
+  min-width: 100px;
+  width: 10%;
+  padding-left: 2%;
+  text-align: center;
 }
 .cmpFirstPeriod {
-    flex: 1;
-    min-width: 100px;
+  flex: 1;
+  min-width: 100px;
 
-    text-align: center;
-    margin-right: 5%;
+  text-align: center;
+  margin-right: 5%;
 }
 
 .cmpSecondPeriod {
-    flex: 1;
-    min-width: 100px;
-    text-align: center;
+  flex: 1;
+  min-width: 100px;
+  text-align: center;
 }
 
 .frameLabel {
-    color: $blue-color;
-    font-size: 1em;
-    font-weight: bold;
+  color: $blue-color;
+  font-size: 1em;
+  font-weight: bold;
 }
 
 .frameBtn {
-    width: 70%;
-    height: 20px;
-    font-size: 0.9em;
+  width: 70%;
+  height: 20px;
+  font-size: 0.9em;
 }
-
 
 .frameList {
-    margin-top: 0;
-    padding: 0;
-    list-style-type: none;
-    font-size: 0.9em;
+  margin-top: 0;
+  padding: 0;
+  list-style-type: none;
+  font-size: 0.9em;
 }
 
-
 .labelContainer {
-    flex: 1;
-    min-width: 210px;
+  flex: 1;
+  min-width: 210px;
 }
 
 .labelMidLayer {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .numRobot {
-    flex: 1;
-    text-align: center;
-    min-width: 100px;
-    margin: 0 5px;
+  flex: 1;
+  text-align: center;
+  min-width: 100px;
+  margin: 0 5px;
 }
 
 .numML {
-    flex: 1;
-    text-align: center;
-    min-width: 100px;
+  flex: 1;
+  text-align: center;
+  min-width: 100px;
 }
 
 .num {
-    font-size: 1.1em;
-    font-weight: bold;
-    color: $blue-color;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: $blue-color;
 }
 
 $menu-items: 3;
@@ -189,66 +186,67 @@ $width: (100/3) * 1%;
 $transition-speed: 0.3s;
 
 .navsWrapper {
-    &:last-child {
-        &:after {
-            content: '';
-            display: block;
-            position: absolute;
-            pointer-events: none;
-            transition: left #{$transition-speed} ease;
-            background: $blue-color;
-            top: 95%;
-            bottom: 0;
-            left: 0;
-            width: $width;
-            z-index: 0;
-        }
+  &:last-child {
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      pointer-events: none;
+      transition: left #{$transition-speed} ease;
+      background: $blue-color;
+      top: 95%;
+      bottom: 0;
+      left: 0;
+      width: $width;
+      z-index: 0;
     }
+  }
 }
 
 @for $i from 1 through $menu-items - 1 {
-    // when the Nav item "is active", make the indicator line up with the navigation item.
-    .navsWrapper:nth-child(#{$i}).is-active ~ .navsWrapper:last-child:after {
-    left:($width*$i)-$width;
-    }
-    .navsWrapper:nth-child(#{$i}).is-active ~ .navsWrapper:last-child:before
-    {
-    left:($width*$i)+($width/2)-$width; // this ensures the triangle lines up to the menu.
-    }
+  // when the Nav item "is active", make the indicator line up with the navigation item.
+  .navsWrapper:nth-child(#{$i}).is-active ~ .navsWrapper:last-child:after {
+    left: ($width * $i)-$width;
+  }
+  .navsWrapper:nth-child(#{$i}).is-active ~ .navsWrapper:last-child:before {
+    left: ($width * $i)+ ($width/2)-$width; // this ensures the triangle lines up to the menu.
+  }
 }
-  
-@for $i from 1 through $menu-items - 1 {
-    // Need to use !important to make the hovers overide if the last:child is the active or hovered
-    .navsWrapper:nth-child(#{$i}):hover ~ .navsWrapper:last-child:after {
-    left:($width*$i)-$width !important;
-    }
 
-    .navsWrapper:nth-child(#{$i}):hover ~ .navsWrapper:last-child:before{
-    left:($width*$i)+($width/2)-$width !important;
-    }
+@for $i from 1 through $menu-items - 1 {
+  // Need to use !important to make the hovers overide if the last:child is the active or hovered
+  .navsWrapper:nth-child(#{$i}):hover ~ .navsWrapper:last-child:after {
+    left: ($width * $i)-$width !important;
+  }
+
+  .navsWrapper:nth-child(#{$i}):hover ~ .navsWrapper:last-child:before {
+    left: ($width * $i)+ ($width/2)-$width !important;
+  }
 }
-      
+
 .navsWrapper {
-    &:last-child {
+  &:last-child {
     // make sure the last-child talks to itself
-    &:hover, &.is-active {
-        &:before {
+    &:hover,
+    &.is-active {
+      &:before {
         // Need to use important because the sibling selctor is more specific.
-        left: (100%-$width)+($width/2) !important;
-        }
-        &:after{
+        left: (100%-$width)+ ($width/2) !important;
+      }
+      &:after {
         left: 100%-$width !important;
-        }
-    }        
+      }
     }
+  }
 }
 
-*, *:after {
-box-sizing: border-box;
+*,
+*:after {
+  box-sizing: border-box;
 }
 
 %cf:after {
-    content: " ";
-    display: table;
-    clear: both;
+  content: " ";
+  display: table;
+  clear: both;
 }
