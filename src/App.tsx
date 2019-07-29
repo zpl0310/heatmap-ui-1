@@ -16,11 +16,11 @@ class App extends React.Component<{}, {}> {
     return (
       <Provider store={store}>
         <div className="container">
-          <div className="leftSide">
-            <SideBar />
-          </div>
-          <div className="rightSide">
+          <div className="top">
             <TopBar />
+          </div>
+          <div className="bot">
+            <SideBar />
           </div>
         </div>
       </Provider>

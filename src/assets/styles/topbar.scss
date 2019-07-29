@@ -1,15 +1,28 @@
 $blue-color:#4681b8;
-$divider-color:#f7f7f7;
+$divider-color:#e0e0de;
 $background-color:grey;
+
 
 .topBar {
     min-width: 800px;
-    min-height: 122px;  
+    min-height: 122px;
+    display: flex;  
+}
+
+.fetch-logo {
+    margin-right:5px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    height:122px;
+    width: 250px;
+    //width: 25%;
 }
 
 .topBarMid {
     display: flex;
     flex-direction: row;
+    width: 75%;
 }
 
 .topLeft {
@@ -19,13 +32,16 @@ $background-color:grey;
     color: $blue-color;
     font-weight: bold;
     font-size: 2.5em;
-    height: 30%;
-    padding-top: 2%;
+    //height: 30%;
+    padding-top: 1em;
     padding-left: 5%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .topMid {
-    padding-top: 3%;
+    padding-top: 2.5em;
     min-width: 380px;
     flex: 1;
     width: 35%;
@@ -47,52 +63,38 @@ $background-color:grey;
     font-size: 1em;
     height: 20px;
     text-align: center;
-    padding-top:32%;
-    padding-bottom: 32%;
+    padding-top:2.5em;
+    //padding-bottom: 32%;
 }
 
 .curNav {
     font-weight: bold;
     color: $blue-color;
-    border-bottom: 3px solid $blue-color;
+    //border-bottom: 3px solid $blue-color;
     min-width: 75px;
     height: 20px;
     text-align: center;
-    padding-top:32%;
-    padding-bottom: 32%;
+    padding-top:2.5em;
+    //padding-bottom: 32%;
 }
 
 .topRightMid {
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 .navsWrapper {
     flex: 1;
+    height: 110px;
 }
 
 .navsWrapper:hover {   
     color: $blue-color;
     background-color: $divider-color;  
-    transition: background-color 0.3s ease;
-    border-bottom: 3px solid $blue-color;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    //border-bottom: 3px solid $blue-color;
 }
-
-/*
-.navsWrapper:after {
-    content: '';
-    display: block;
-    border-bottom: 3px solid red;
-    width: 0;
-    position: absolute;
-    right: 0;
-    -webkit-transition: 1s ease;
-    transition: 1s ease;
-}
-
-.navsWrapper:hover:after { 
-    width: 10em; 
-}  
-*/
 
 .navs:hover {
     cursor: pointer;
@@ -149,6 +151,7 @@ $background-color:grey;
     margin-top: 0;
     padding: 0;
     list-style-type: none;
+    font-size: 0.9em;
 }
 
 
@@ -179,4 +182,73 @@ $background-color:grey;
     font-size: 1.1em;
     font-weight: bold;
     color: $blue-color;
+}
+
+$menu-items: 3;
+$width: (100/3) * 1%;
+$transition-speed: 1.3s;
+
+.navsWrapper {
+    &:last-child {
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            pointer-events: none;
+            transition: left #{$transition-speed} ease;
+            background: $blue-color;
+            top: 95%;
+            bottom: 0;
+            left: 0;
+            width: $width;
+            z-index: 0;
+        }
+    }
+}
+
+@for $i from 1 through $menu-items - 1 {
+    // when the Nav item "is active", make the indicator line up with the navigation item.
+    .navsWrapper:nth-child(#{$i}).is-active ~ .navsWrapper:last-child:after {
+    left:($width*$i)-$width;
+    }
+    .navsWrapper:nth-child(#{$i}).is-active ~ .navsWrapper:last-child:before
+    {
+    left:($width*$i)+($width/2)-$width; // this ensures the triangle lines up to the menu.
+    }
+}
+  
+@for $i from 1 through $menu-items - 1 {
+    // Need to use !important to make the hovers overide if the last:child is the active or hovered
+    .navsWrapper:nth-child(#{$i}):hover ~ .navsWrapper:last-child:after {
+    left:($width*$i)-$width !important;
+    }
+
+    .navsWrapper:nth-child(#{$i}):hover ~ .navsWrapper:last-child:before{
+    left:($width*$i)+($width/2)-$width !important;
+    }
+}
+      
+.navsWrapper {
+    &:last-child {
+    // make sure the last-child talks to itself
+    &:hover, &.is-active {
+        &:before {
+        // Need to use important because the sibling selctor is more specific.
+        left: (100%-$width)+($width/2) !important;
+        }
+        &:after{
+        left: 100%-$width !important;
+        }
+    }        
+    }
+}
+
+*, *:after {
+box-sizing: border-box;
+}
+
+%cf:after {
+    content: " ";
+    display: table;
+    clear: both;
 }
