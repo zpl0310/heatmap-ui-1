@@ -83,7 +83,7 @@ class LiveMap extends Component<Props, LiveMapState> {
         this.setState(prevState => ({
             robots: {
                 ...prevState.robots,
-                [data.robot]: updatedRobot
+                [name]: updatedRobot
             }
         }))
     }
