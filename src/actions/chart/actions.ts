@@ -23,6 +23,7 @@ export const loadChart = () => async (dispatch: ThunkDispatch<AppState, undefine
     dispatch({ type: START_CHART_LOADING })
 
     try {
+        // TODO: Change url to actual API endpoint
         const res: AxiosResponse = await axios.get('api/rooms', {
             params: {
                 // timeFrame: ,

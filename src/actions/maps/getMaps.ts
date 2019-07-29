@@ -4,6 +4,7 @@ import { DEV_TOKEN, DEV_INSTANCE } from '../../components/map/constants';
 
 export async function getMaps(instance: string, page: number = 1, results: MapInfo[] = []): Promise<MapInfo[]> {
     try {
+        // TODO: Change url to actual API endpoint
         let res = await axios.get(`http://${instance}/api/v1/maps/?page=${page}`, {
             headers: { 'Authorization': DEV_TOKEN },
         })
@@ -32,6 +33,7 @@ export async function getMaps(instance: string, page: number = 1, results: MapIn
 
 export async function getMapImage(id: string) {
     try {
+        // TODO: Change url to actual API endpoint
         let res = await axios.get(`http://${DEV_INSTANCE}/api/v1/maps/${id}/image`, {
             headers: { 'Authorization': DEV_TOKEN },
             responseType: 'arraybuffer'

@@ -12,7 +12,6 @@ import {
 import { AppState } from '../../store'
 
 import { ThunkDispatch } from 'redux-thunk'
-import axios, { AxiosResponse } from 'axios'
 import { DEV_INSTANCE, DEV_TOKEN } from '../../components/map/constants';
 import { getMaps } from './getMaps';
 

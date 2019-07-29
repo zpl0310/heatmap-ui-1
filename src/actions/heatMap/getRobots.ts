@@ -6,6 +6,7 @@ import { statusFromLocalization } from '../../components/map/utils';
 
 export async function getRobotStates(id: string, page: number = 1, results: RobotMap = {}): Promise<RobotMap> {
     try {
+        // TODO: Change url to actual API endpoint
         let res = await axios.get(`http://${DEV_INSTANCE}/api/v1/maps/${id}/robots/?page=${page}`, {
             headers: { 'Authorization': DEV_TOKEN },
         })
