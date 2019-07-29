@@ -1,14 +1,19 @@
+$divider-color:#e0e0de;
+
 .container {
     overflow: auto;
 }
-.leftSide {
+
+.bot {
     width: 25%;
-    min-width: 250px;
+    width: 300px;
     margin-left: 2px;
     float: left;
     overflow: hidden;
 }
 
-.rightSide {
+.top {
     overflow: hidden;
+    height: 122px;
+    border-bottom: 2px inset $divider-color;
 }
