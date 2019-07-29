@@ -1,6 +1,7 @@
 import React from 'react';
-import SideBar from './containers/SideBar'; 
+import SideBar from './containers/SideBar';
 import TopBar from './containers/TopBar';
+import LiveMap from './containers/LiveMap'
 import './App.scss';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
@@ -12,7 +13,7 @@ const createStoreWithMiddleware = applyMiddleware(thunk, logger)(createStore)
 const store = createStoreWithMiddleware(rootReducer)
 
 class App extends React.Component<{}, {}> {
-  render() { 
+  render() {
     return (
       <Provider store={store}>
         <div className="container">
@@ -20,13 +21,15 @@ class App extends React.Component<{}, {}> {
             <TopBar />
           </div>
           <div className="bot">
-            <SideBar />
+            <div className="bot-side">
+              <SideBar />
+            </div>
+            <div className="bot-main">
+              <LiveMap />
+            </div>
           </div>
         </div>
       </Provider>
-      // <div className="App">
-      //   hey
-      // </div>
     );
   }
 }

@@ -3,16 +3,18 @@ export type Instance = {
     name: string
 }
 
-export type Map = {
+export type MapInfo = {
     id: string
     name: string
-    image: MapImage | null
+    x: number
+    y: number
+    image: MapImage
 }
 
 export type MapImage = {
     width: number,
     height: number,
-    image: string //not sure
+    src: string
 }
 
 export type MLPoint = {
@@ -27,10 +29,8 @@ export type ChartPoint = {
 }
 
 export type Robot = {
-    id: string
-    x: number
-    y: number
-    theta: number
+    name: string
+    pose: Pose
     status: RobotStatus
 }
 
@@ -39,5 +39,21 @@ export enum RobotStatus {
     Idle = "IDLE",
     Working = "WORKING",
     Mislocalized = "MISLOCALIZED",
-    Error = "ERROR"
+    Error = "ERROR",
+    Stopped = "RUNSTOP"
+}
+
+export type Pose = {
+    x: number
+    y: number
+    theta: number
+}
+
+export type PoseAtTime = {
+    pose: Pose
+    time: number
+}
+
+export type RobotMap = {
+    [name: string]: Robot
 }

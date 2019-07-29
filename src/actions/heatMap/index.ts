@@ -1,4 +1,4 @@
-import { MLPoint,Robot } from '../../definitions'
+import { MLPoint,Robot, RobotMap } from '../../definitions'
 
 export const LOAD_POINTS = 'LOAD_POINTS'
 export const LOAD_ROBOTS = 'LOAD_ROBOTS'
@@ -16,7 +16,7 @@ type loadPoints = {
 
 type loadRobots = {
     type: typeof LOAD_ROBOTS
-    robots: Robot[]
+    robots: RobotMap
 }
 
 type startRobotLoading = {
@@ -51,6 +51,6 @@ export type HeatMapStoreState = {
     loading: boolean,
 	error: string,
     points: MLPoint[],
-	robots: Robot[],
+	robots: RobotMap,
 	Interval: number,
 }
