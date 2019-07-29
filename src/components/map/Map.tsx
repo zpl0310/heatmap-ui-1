@@ -36,9 +36,10 @@ class Map extends Component<MapProps, {}> {
     }
 
     handleResize() {
-        this.application.renderer.resize(window.innerWidth, window.innerHeight);
-        this.viewport.resize(window.innerWidth, window.innerHeight);
-        this.initializeHeatmap()
+        //this.initializeHeatmap()
+        const parent = this.parentContainer.current!
+        this.application.renderer.resize(parent.clientWidth, parent.clientHeight);
+        this.viewport.resize(parent.clientWidth, parent.clientHeight);
     }
 
     async componentDidMount() {

@@ -20,7 +20,7 @@ export type MapImage = {
 export type MLPoint = {
     x: number
     y: number
-    //value: number
+    value: number
 }
 
 export type ChartPoint = {
