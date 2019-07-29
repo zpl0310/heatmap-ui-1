@@ -5,7 +5,7 @@ import '../assets/styles/heatmap.scss';
 import Map from '../components/map/Map';
 import { RobotStatus, RobotMap } from '../definitions';
 import { RobotStatePositionCache } from '../components/map/robotStreamCache';
-import { DEV_MAP_ID, DEV_TOKEN, DEV_INSTANCE } from '../components/map/constants';
+import { DEV_MAP_ID, DEV_INSTANCE } from '../components/map/constants';
 import { statusFromLocalization } from '../components/map/utils';
 import { AppState } from '../store';
 

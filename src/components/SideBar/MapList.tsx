@@ -1,18 +1,17 @@
 import * as React from 'react';
 import MapListItem from './MapListItem';
 import '../../assets/styles/sidebar.scss';
-import { MapInfo } from '../../definitions';
-//import back from '../assets/back.png';
+import { MapStoreState } from '../../actions/maps';
+import Spinner from '../common/Spinner'
 declare var require: any
 const back = require('../../assets/back1.svg') as string;
 
 export interface MapListProps {
     curInstance: string,
-    curMap: string,
     changeSidebarView: Function,
     onChangeMap: Function,
     onClearCurMap: Function,
-    mapList: MapInfo[]
+    maps: MapStoreState
 }
 
 export interface MapListState {
@@ -25,25 +24,28 @@ class MapList extends React.Component<MapListProps, MapListState> {
     }
 
     render() {
-        const { curMap, curInstance } = this.props
-        const mapList = this.props.mapList.map((map) => (
+        console.log(this.props)
+        const mapList = this.props.maps.list.map((map) => (
             <MapListItem
                 key={map.id}
                 name={map.name}
-                curMap={curMap}
+                curMap={this.props.maps.current}
                 onChangeMap={this.props.onChangeMap}
             />
         ))
-        
+
         return (
             <div>
                 <div className="backDiv">
                     <div className="backMidDiv">
                         <span className="backButton"><img src={back} alt="back" onClick={this.handleClick} /> </span>
-                        <label className="curInstanceLabel">{curInstance}</label>
+                        <label className="curInstanceLabel">{this.props.curInstance}</label>
                     </div>
                 </div>
-                <ul className="list">{mapList}</ul>
+                {this.props.maps.loading ?
+                    <Spinner /> :
+                    <ul className="list">{mapList}</ul>
+                }
             </div>
         );
     }
