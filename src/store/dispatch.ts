@@ -5,6 +5,7 @@ import * as mapActions from '../actions/maps/actions'
 //import { Instance, Map, MapImage, MLPoint} from '../definitions'
 import { ThunkDispatch } from 'redux-thunk';
 import { AppState } from '.';
+import { DEV_MAP_ID } from '../components/map/constants';
 
 export const dispatchActions = (dispatch: ThunkDispatch<AppState, undefined, AppActionTypes>) => {
     return {
@@ -14,7 +15,7 @@ export const dispatchActions = (dispatch: ThunkDispatch<AppState, undefined, App
         },
         onChangeMap: (mapName: string) => {
             dispatch(mapActions.changeMap(mapName))
-            dispatch(hmActions.loadRobots('5'))
+            dispatch(hmActions.loadRobots(DEV_MAP_ID)) // TODO: Use map ID
         },
         onClearCurMap: () => {
             dispatch(mapActions.clearCurMap())

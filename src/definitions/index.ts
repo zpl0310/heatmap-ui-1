@@ -23,6 +23,11 @@ export type MLPoint = {
     value: number
 }
 
+export type HeatGrid = {
+    gridSize: number
+    values: MLPoint[]
+}
+
 export type ChartPoint = {
     date: Date
     value: number

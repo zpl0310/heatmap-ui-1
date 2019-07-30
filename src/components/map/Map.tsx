@@ -1,15 +1,17 @@
 import * as React from 'react'
 import { Component, RefObject } from 'react'
 import { Application, Container, Loader, Sprite, TextureLoader } from 'pixi.js'
+import * as PIXI from 'pixi.js'
 import { Viewport } from 'pixi-viewport'
 
 import { CENTER_ANCHOR, MAX_FPS, DEV_MAP_ID, MAP_PIXEL_RATIO } from './constants'
 import '../../assets/styles/heatmap.scss'
 import RobotLayer from './RobotLayer'
 import robot from '../../assets/freight100.svg'
-import { MapInfo, RobotMap } from '../../definitions';
+import { MapInfo, RobotMap, HeatGrid } from '../../definitions';
 import { getMapInfo } from './getMapInfo';
 import { getFitZoom } from './utils';
+import HeatLayer from './HeatLayer';
 
 type MapProps = {
     robots?: RobotMap
@@ -22,12 +24,14 @@ class Map extends Component<MapProps, {}> {
     private viewport!: Viewport
     private world!: Container
     private robotLayer!: RobotLayer
+    private heatLayer!: HeatLayer
     private application!: Application
     private map!: MapInfo
 
     constructor(props: MapProps) {
         super(props)
 
+        PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST
         this.parentContainer = React.createRef()
         this.renderer = React.createRef()
     }
@@ -115,6 +119,25 @@ class Map extends Component<MapProps, {}> {
         this.world.addChild(mapSprite)
 
         this.application.start()
+
+
+        this.heatLayer = new HeatLayer()
+        this.heatLayer.position.set(0, this.map.image.height)
+        let gridSize = 0.05
+        let gridValues = []
+        for (let x = 0; x < this.map.image.width * MAP_PIXEL_RATIO / gridSize; x++) {
+            for (let y = 0; y < this.map.image.height * MAP_PIXEL_RATIO / gridSize; y++) {
+                //let value = Math.sin((x | 10) ^ (y | 10))
+                let value = 1 - Math.sqrt(Math.pow(x - this.map.image.height / 2, 2) + Math.pow(y - this.map.image.height / 2, 2)) * 2 / this.map.image.height
+                if (value > 0) {
+                    gridValues.push({ x, y, value })
+                }
+            }
+        }
+
+        let grid: HeatGrid = { gridSize, values: gridValues }
+        this.heatLayer.update(grid, this.map.image)
+        this.world.addChild(this.heatLayer)
 
         if (this.props.showRobots) {
             if (!this.props.robots) {
