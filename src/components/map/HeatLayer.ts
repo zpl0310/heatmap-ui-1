@@ -1,5 +1,5 @@
-import { Container, Rectangle, Texture, Sprite, BaseTexture } from 'pixi.js'
-import { DEFAULT_SCALE, MAP_PIXEL_RATIO, CENTER_ANCHOR } from './constants';
+import { Container, Rectangle, Texture, Sprite, BaseTexture, filters } from 'pixi.js'
+import { DEFAULT_SCALE, MAP_PIXEL_RATIO } from './constants';
 import { HeatGrid, MapImage } from '../../definitions';
 import { heatColor } from './utils';
 
@@ -37,6 +37,7 @@ export default class HeatLayer extends Container {
             baseTexture.setResolution(1 / scale)
             let texture = new Texture(baseTexture, new Rectangle(0, 0, image.width, image.height))
             let sprite = new Sprite(texture)
+            //sprite.filters = [new filters.BlurFilter(3)]
             this.addChild(sprite)
         }
     }

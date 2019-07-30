@@ -21,6 +21,7 @@ type MapProps = {
 class Map extends Component<MapProps, {}> {
     private parentContainer!: RefObject<HTMLDivElement>
     private renderer!: RefObject<HTMLCanvasElement>
+
     private viewport!: Viewport
     private world!: Container
     private robotLayer!: RobotLayer
@@ -59,6 +60,10 @@ class Map extends Component<MapProps, {}> {
             .add('map', this.map.image.src) // TODO: Unique key per map, grab map from Redux
             .load(() => this.startApp())
 
+        window.addEventListener("resize", () => {
+            this.handleResize();
+        })
+
         // Application setup
         this.application = new Application({
             view: rendererCanvas,
@@ -69,10 +74,7 @@ class Map extends Component<MapProps, {}> {
             backgroundColor: 0x999999,
         })
 
-        window.addEventListener("resize", () => {
-            this.handleResize();
-        })
-
+        // Viewport setup
         const dims = {
             screenWidth: window.innerHeight,
             screenHeight: window.innerHeight,
@@ -80,7 +82,6 @@ class Map extends Component<MapProps, {}> {
             worldHeight: this.map.image.height,
         }
 
-        // Viewport setup
         this.viewport = new Viewport({
             ...dims,
             interaction: this.application.renderer.plugins.interaction,
@@ -88,7 +89,6 @@ class Map extends Component<MapProps, {}> {
 
         const maxZoom = Math.max(this.map.image.height, this.map.image.width) * 2
         const minZoom = Math.min(this.map.image.height, this.map.image.width) / 3
-
         this.viewport
             .drag({ clampWheel: true, direction: "all", underflow: "center" })
             .pinch({ noDrag: true })
@@ -124,6 +124,7 @@ class Map extends Component<MapProps, {}> {
         this.heatLayer = new HeatLayer()
         this.heatLayer.position.set(0, this.map.image.height)
         let gridSize = 0.05
+        // TODO: Use real data
         let gridValues = []
         for (let x = 0; x < this.map.image.width * MAP_PIXEL_RATIO / gridSize; x++) {
             for (let y = 0; y < this.map.image.height * MAP_PIXEL_RATIO / gridSize; y++) {
@@ -134,7 +135,6 @@ class Map extends Component<MapProps, {}> {
                 }
             }
         }
-
         let grid: HeatGrid = { gridSize, values: gridValues }
         this.heatLayer.update(grid, this.map.image)
         this.world.addChild(this.heatLayer)
@@ -143,6 +143,7 @@ class Map extends Component<MapProps, {}> {
             if (!this.props.robots) {
                 throw new Error("No robots provided to display")
             }
+
             // Robot layer setup
             this.robotLayer = new RobotLayer()
             this.robotLayer.position.x = -this.map.x / MAP_PIXEL_RATIO
