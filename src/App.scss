@@ -5,8 +5,8 @@ $divider-color: #e0e0de;
 }
 
 .bot-side {
-  width: 300px;
-  min-width: 300px;
+  width: 310px;
+  min-width: 310px;
   margin-left: 2px;
   height: calc(100vh - 122px);
   overflow-y: auto;
@@ -19,6 +19,8 @@ $divider-color: #e0e0de;
   width: calc(100vw - 302px);
   height: calc(100vh - 122px);
   overflow: hidden;
+  margin-left: 3em;
+  max-width: 85em;
 }
 
 .bot {
