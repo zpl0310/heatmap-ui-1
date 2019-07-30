@@ -1,0 +1,46 @@
+$blue-color:#4681b8;
+
+.controlContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.leftControl {
+    flex: 1;
+    margin-left:3em;
+    
+}
+
+.rightControl {
+    flex: 1;
+    margin-left:3em;
+}
+
+.viewSpan {
+    width: 11em;
+    display: inline-block;
+}
+
+.controlLabel {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    color: $blue-color;
+}
+
+.startDate {
+    margin-top: 1em;
+}
+
+.endDate {
+    margin: 1em 0;
+}
+
+.dateLabel {
+    width: 5em;
+    display: inline-block;
+}
+
+.timeFrame {
+    width: 4em;
+}

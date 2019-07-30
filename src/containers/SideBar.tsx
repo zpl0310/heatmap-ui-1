@@ -9,9 +9,6 @@ import { dispatchActions } from '../store/dispatch';
 import { AppState } from '../store';
 //import { Instance, Map, MapImage } from '../definitions';
 
-declare var require: any
-const fetchLogo = require("../assets/fetchcore.svg") as string;
-
 type SideBarProps = {
 
 }
@@ -63,12 +60,6 @@ class SideBar extends Component<Props, SideBarState> {
                 {display}
             </div>
         );
-        // return (
-        //     <div className="sideBar">
-        //         <img src={fetchLogo} className="fetch-logo" alt="logo" />
-        //         {display}
-        //     </div>
-        // );
     }
 }
 

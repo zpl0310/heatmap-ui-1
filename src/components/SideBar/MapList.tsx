@@ -18,6 +18,7 @@ export interface MapListState {
 }
 
 class MapList extends React.Component<MapListProps, MapListState> {
+
     handleClick = () => {
         this.props.changeSidebarView()
         this.props.onClearCurMap()
@@ -25,6 +26,15 @@ class MapList extends React.Component<MapListProps, MapListState> {
 
     render() {
         console.log(this.props)
+        // const maps=["a map","cool map","really cool map"]
+        // const mapList = maps.map((map)=> (
+        //     <MapListItem
+        //         key={map}
+        //         name={map}
+        //         curMap={this.props.maps.current}
+        //         onChangeMap={this.props.onChangeMap}
+        //     />
+        // ))
         const mapList = this.props.maps.list.map((map) => (
             <MapListItem
                 key={map.id}
