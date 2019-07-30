@@ -9,22 +9,15 @@ import { dispatchActions } from '../store/dispatch';
 import { AppState } from '../store';
 //import { Instance, Map, MapImage } from '../definitions';
 
-declare var require: any
-const fetchLogo = require("../assets/fetchcore.svg") as string;
-
 type SideBarProps = {
-    
+
 }
 
 type SideBarState = {
     displayInstance: boolean,
 }
 
-export interface OwnProps {
-    
-}
-
-const mapStateToProps = (state: AppState, ownProps: OwnProps) => ({ ...state, ...ownProps })
+const mapStateToProps = (state: AppState, ownProps: SideBarProps) => ({ ...state, ...ownProps })
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof dispatchActions>
 
 class SideBar extends Component<Props, SideBarState> {
@@ -43,20 +36,20 @@ class SideBar extends Component<Props, SideBarState> {
     }
 
     render() {
-        let display = (<div />); 
+        let display = (<div />);
         if (this.state.displayInstance) {
-            display = (      
-                <InstanceList 
+            display = (
+                <InstanceList
                     onChangeInstance={this.props.onChangeInstance}
                     changeSidebarView={this.changeSidebarView}
-                />            
+                />
             );
         } else {
             display = (
-                <MapList 
-                    curMap={this.props.maps.current}
+                <MapList
                     onChangeMap={this.props.onChangeMap}
                     onClearCurMap={this.props.onClearCurMap}
+                    maps={this.props.maps}
                     curInstance={this.props.instances.current}
                     changeSidebarView={this.changeSidebarView}
                 />
@@ -64,7 +57,6 @@ class SideBar extends Component<Props, SideBarState> {
         }
         return (
             <div className="sideBar">
-                <img src={fetchLogo} className="fetch-logo" alt="logo" />
                 {display}
             </div>
         );

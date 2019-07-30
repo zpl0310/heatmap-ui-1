@@ -1,14 +1,5 @@
-$divider-color:#f7f7f7;
+$divider-color:#e0e0de;
 $blue-color:#4681b8;
-
-.fetch-logo {
-    margin-right:5px;
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-bottom: 10px;
-    
-    border-bottom: 2px solid $divider-color;
-}
 
 .selectLabel {
     height: 120px;
@@ -53,6 +44,7 @@ $blue-color:#4681b8;
     margin-top: 0;
     padding: 0;
     list-style-type: none;
+    overflow-y: auto;
 }
 
 .list .curMap {
@@ -82,3 +74,12 @@ $blue-color:#4681b8;
     padding-top: 16px;
 }
 
+.spinner-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.sk-spinner {
+    margin: 0 auto;
+}
