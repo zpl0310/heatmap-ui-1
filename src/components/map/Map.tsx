@@ -48,12 +48,17 @@ class Map extends Component<MapProps, {}> {
 
         // Load necessary resources
         // TODO: Move loading somewhere better
-        this.map = await getMapInfo(DEV_MAP_ID) as MapInfo // TODO: Get map ID from route
-        Loader.registerPlugin(new TextureLoader())
-        Loader.shared
-            .add('robot', robot)
-            .add('map', this.map.image.src) // TODO: Unique key per map, grab map from Redux
-            .load(() => this.startApp())
+        try {
+            this.map = await getMapInfo('7') as MapInfo // TODO: Get map ID from route
+            Loader.registerPlugin(new TextureLoader())
+            Loader.shared
+                .add('robot', robot)
+                .add('map', this.map.image.src) // TODO: Unique key per map, grab map from Redux
+                .load(() => this.startApp())
+        } catch(err) {
+            console.log(err)
+            return
+        }
 
         // Application setup
         this.application = new Application({

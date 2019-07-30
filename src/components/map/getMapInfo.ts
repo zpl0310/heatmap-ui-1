@@ -16,8 +16,6 @@ export async function getMapInfo(id: string) {
         }
         return map
     } catch(err) {
-        // TODO: Proper error handling (redux)
-        console.log(err)
-        return {}
+        throw(err)
     }
 }
