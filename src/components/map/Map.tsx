@@ -118,9 +118,7 @@ class Map extends Component<MapProps, {}> {
         mapSprite.position.set(this.map.image.width / 2, this.map.image.height / 2)
         this.world.addChild(mapSprite)
 
-        this.application.start()
-
-
+        // Heat layer setup
         this.heatLayer = new HeatLayer()
         this.heatLayer.position.set(0, this.map.image.height)
         let gridSize = 0.05
@@ -139,12 +137,12 @@ class Map extends Component<MapProps, {}> {
         this.heatLayer.update(grid, this.map.image)
         this.world.addChild(this.heatLayer)
 
+        // Robot layer setup
         if (this.props.showRobots) {
             if (!this.props.robots) {
                 throw new Error("No robots provided to display")
             }
 
-            // Robot layer setup
             this.robotLayer = new RobotLayer()
             this.robotLayer.position.x = -this.map.x / MAP_PIXEL_RATIO
             this.robotLayer.position.y = this.map.image.height + this.map.y / MAP_PIXEL_RATIO
@@ -155,6 +153,8 @@ class Map extends Component<MapProps, {}> {
                 this.robotLayer.update(this.props.robots!)
             })
         }
+
+        this.application.start()
     }
 
     render() {
