@@ -1,22 +1,20 @@
 import * as React from 'react';
 import PlotlyChart from 'react-plotlyjs-ts';
-//import Plot from 'react-plotly.js';
-
+import { ChartPoint } from '../../definitions'
 
 type HisChartProps = {
+    points: ChartPoint[]
 }
 
-type HisChartState = {
-   
-}
-
-
-class HisChart extends React.Component<HisChartProps, HisChartState> {
+class HisChart extends React.Component<HisChartProps, {}> {
 
     public handleClick = (evt: any) => {}
     public handleHover = (evt: any) => {}
 
     render() {
+        let labels = this.props.points.map(point=>point.date)
+        let values = this.props.points.map(point=>point.value)
+
         const data = [
             {
                 marker: {
@@ -24,14 +22,18 @@ class HisChart extends React.Component<HisChartProps, HisChartState> {
                 },
                 name: 'Trending',
                 type: 'scatter',
-                x: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-                y: [6, 2, 3, 10, 8, 20, 16, 7, 1, 6, 3, 2]
+                x: labels,
+                y: values
+                //x: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                //y: [6, 2, 3, 10, 8, 20, 16, 7, 1, 6, 3, 2]
             },
             {
                 name: 'Mislocalizations',
                 type: 'bar',
-                x: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-                y: [6, 2, 3, 10, 8, 20, 16, 7, 1, 6, 3, 2]
+                x: labels,
+                y: values
+                //x: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                //y: [6, 2, 3, 10, 8, 20, 16, 7, 1, 6, 3, 2]
             }
         ];
         const layout = {

@@ -10,8 +10,6 @@ import {
     HeatMapAction,
 }from '../../actions/heatMap'
 
-//import { Instance } from '../../definitions'
-
 const initial: HeatMapStoreState = {
     loading: false,
 	error: "",

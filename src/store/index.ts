@@ -4,9 +4,6 @@ import maps from './reducers/maps'
 import heatMap from './reducers/heatMap'
 import cmpMap from './reducers/cmpMap'
 
-//import rooms from './reducers/rooms'
-
-
 export const rootReducer = combineReducers({
     instances,
     maps,
