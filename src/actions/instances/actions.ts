@@ -16,22 +16,18 @@ export const changeInstance = (instanceName: string): InstanceAction => ({
     instanceName
 }) 
 
-// need to change after api set up
 export const loadInstances = () => async (dispatch: ThunkDispatch<AppState, undefined, InstanceAction>) => {
     dispatch({ type: START_INSTANCE_LOADING })
 
     try {
         const res: AxiosResponse = await axios.get('http://localhost:8080/api/instances')
         //, {
-            // might need it later
             // headers: {
             //     'Token': token
             // }
         //})
-        console.log("data is" + res.data)
-        //let instances = res.data
+         
         let instances = res.data.map((instance: string): Instance => ({
-            //id: instance.id,
             name: instance,
         }))
 
@@ -44,8 +40,4 @@ export const loadInstances = () => async (dispatch: ThunkDispatch<AppState, unde
     dispatch({ type: STOP_INSTANCE_LOADING, })
 }
 
-// export const loadInstances = (instances: Instance[]): InstanceAction => ({
-//     type: LOAD_INSTANCES,
-//     instances
-// })
 

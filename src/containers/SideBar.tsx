@@ -7,7 +7,7 @@ import InstanceList from '../components/SideBar/InstanceList';
 import MapList from '../components/SideBar/MapList';
 import { dispatchActions } from '../store/dispatch';
 import { AppState } from '../store';
-//import { Instance, Map, MapImage } from '../definitions';
+
 
 type SideBarProps = {
 
@@ -15,6 +15,7 @@ type SideBarProps = {
 
 type SideBarState = {
     displayInstance: boolean,
+    isLoading: boolean
 }
 
 const mapStateToProps = (state: AppState, ownProps: SideBarProps) => ({ ...state, ...ownProps })
@@ -25,11 +26,13 @@ class SideBar extends Component<Props, SideBarState> {
         super(props);
         this.state = {
             displayInstance: true,
+            isLoading: true,
         }
     }
 
     componentDidMount() {
         this.props.onLoadInstances()
+        console.log(this.props)
     }
 
     //switch between instance list and map list
@@ -61,6 +64,7 @@ class SideBar extends Component<Props, SideBarState> {
                 />
             )
         }
+
         return (
             <div className="sideBar">
                 {display}
