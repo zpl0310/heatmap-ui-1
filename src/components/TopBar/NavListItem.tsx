@@ -6,11 +6,7 @@ export interface NavListItemProps {
     onNavChange: Function
 }
  
-export interface NavListItemState {
-    
-}
- 
-class NavListItem extends React.Component<NavListItemProps, NavListItemState> {
+class NavListItem extends React.Component<NavListItemProps, {}> {
     handleClick = (s:string) => {
         this.props.onNavChange(s)
     }

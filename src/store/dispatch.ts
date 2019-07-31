@@ -5,7 +5,6 @@ import * as mapActions from '../actions/maps/actions'
 //import { Instance, Map, MapImage, MLPoint} from '../definitions'
 import { ThunkDispatch } from 'redux-thunk';
 import { AppState } from '.';
-import { async } from 'q';
 
 export const dispatchActions = (dispatch: ThunkDispatch<AppState, undefined, AppActionTypes>) => {
     return {

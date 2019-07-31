@@ -1,5 +1,5 @@
 import * as React from 'react';
-import NavListItem from './NavListItem'
+import NavListItem from './NavListItem';
 
 export interface NavListProps {
     curNav: string

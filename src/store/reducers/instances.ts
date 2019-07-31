@@ -8,8 +8,6 @@ import {
     InstanceAction
 }from '../../actions/instances'
 
-//import { Instance } from '../../definitions'
-
 const initial: InstanceStoreState = {
     loading: false,
     list: [],

@@ -20,7 +20,7 @@ export const loadPoints = (points: MLPoint[]): HeatMapAction => ({
     points
 })
 
-// *** might need to change after api set up
+// TODO: need to change after api set up
 export const loadRobots = (id: string) => async (dispatch: ThunkDispatch<AppState, undefined, HeatMapAction>) => {
     dispatch({ type: START_ROBOT_LOADING })
 

@@ -3,8 +3,8 @@ import MapListItem from './MapListItem';
 import '../../assets/styles/sidebar.scss';
 import { MapStoreState } from '../../actions/maps';
 import Spinner from '../common/Spinner'
-declare var require: any
-const back = require('../../assets/back1.svg') as string;
+//declare var require: any
+//const back = require('../../assets/back1.svg') as string;
 
 export interface MapListProps {
     curInstance: string,
@@ -13,6 +13,7 @@ export interface MapListProps {
     onClearCurMap: Function,
     onLoadMaps: Function,
     maps: MapStoreState
+    onNavChange: Function,
 }
 
 class MapList extends React.Component<MapListProps, {}> {
@@ -20,6 +21,7 @@ class MapList extends React.Component<MapListProps, {}> {
     handleClick = () => {
         this.props.changeSidebarView()
         this.props.onClearCurMap()
+        this.props.onNavChange("")
     }
 
     componentWillMount() {

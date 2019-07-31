@@ -3,7 +3,7 @@ import TimeFrame from '../TopBar/TimeFrame';
 import DatePicker from "react-datepicker";
 
 export interface TimeRangeProps {
-    
+    //TODO:
 }
  
 export interface TimeRangeState {

@@ -5,11 +5,7 @@ export interface RobotLabelProps {
     numML: number,
 }
  
-export interface RobotLabelState {
-    
-}
- 
-class RobotLabel extends React.Component<RobotLabelProps, RobotLabelState> {
+class RobotLabel extends React.Component<RobotLabelProps, {}> {
     
     render() { 
         const { numRobot, numML } = this.props

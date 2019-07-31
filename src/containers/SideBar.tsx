@@ -12,7 +12,11 @@ type SideBarState = {
     displayInstance: boolean,
 }
 
-const mapStateToProps = (state: AppState, ownProps: {}) => ({ ...state, ...ownProps })
+type OwnProps = {
+    onNavChange: Function
+}
+
+const mapStateToProps = (state: AppState, ownProps: OwnProps) => ({ ...state, ...ownProps })
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof dispatchActions>
 
 class SideBar extends Component<Props, SideBarState> {
@@ -28,7 +32,7 @@ class SideBar extends Component<Props, SideBarState> {
         console.log(this.props)
     }
 
-    //switch between instance list and map list
+    //switch between instance list and map list, consider to use react router
     changeSidebarView = () => {
         this.setState({
             displayInstance: !this.state.displayInstance,
@@ -48,6 +52,7 @@ class SideBar extends Component<Props, SideBarState> {
         } else {
             display = (
                 <MapList
+                    onNavChange={this.props.onNavChange}
                     onLoadMaps={this.props.onLoadMaps}
                     onChangeMap={this.props.onChangeMap}
                     onClearCurMap={this.props.onClearCurMap}

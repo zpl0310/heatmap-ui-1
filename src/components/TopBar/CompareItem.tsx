@@ -3,18 +3,14 @@ import TimeFrame from './TimeFrame'
 import DatePicker from "react-datepicker";
 
 import "../../assets/styles/datepicker.scss";
-
-export interface CompareItemProps {
-    
-}
  
 export interface CompareItemState {
     firstDate: Date
     secondDate: Date
 }
  
-class CompareItem extends React.Component<CompareItemProps, CompareItemState> {
-    constructor(props: CompareItemProps) {
+class CompareItem extends React.Component<{}, CompareItemState> {
+    constructor(props: {}) {
         super(props);
         this.state = {
             firstDate: new Date(),

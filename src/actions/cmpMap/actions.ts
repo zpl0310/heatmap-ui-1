@@ -16,8 +16,8 @@ import {
     CmpMapAction
 }from '.'
 
-// Suppose we are using websocket to handle mlpoints data
-// how to between mlPoints1 and mlPoints2
+// TODO: if calculation is all done in the backend, campare heat map can 
+// be rendered just like normal heat map
 export const loadHeatmap1 = (mlPoints1: MLPoint[]): CmpMapAction => ({
     type: LOAD_HEATMAP1,
     mlPoints1
@@ -32,6 +32,7 @@ export const clearHeatmap1 = (): CmpMapAction => ({
 export const clearHeatmap2 = (): CmpMapAction => ({
     type: CLEAR_HEATMAP2
 })
+
 // export const startMl1Loading = (): CmpMapAction => ({
 //     type: START_ML1_LOADIND
 // })

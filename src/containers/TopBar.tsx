@@ -12,32 +12,18 @@ import CompareItem from '../components/TopBar/CompareItem';
 
 const fetchLogo = require("../assets/fetchcore.svg") as string;
 
-type TopBarState = {
-    curNav: string,
-    disabled: boolean,
+type OwnProps = {
+    onNavChange: Function
+    curNav: string
 }
 
-const mapStateToProps = (state: AppState, ownProps: {}) => ({ ...state, ...ownProps })
+const mapStateToProps = (state: AppState, ownProps: OwnProps) => ({ ...state, ...ownProps })
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof dispatchActions>
 
-class TopBar extends Component<Props, TopBarState> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            curNav: "History",
-            disabled: true,
-        }
-    }
-
-    onNavChange = (s: string) => {
-        this.setState({
-            curNav: s
-        })
-        console.log(this.state.curNav)
-    }
+class TopBar extends Component<Props, {}> {
 
     render() {
-        const {curNav} = this.state
+        const {curNav} = this.props
         let display=(<div className="topMid"/>)
         if (curNav==="Heatmap") {
             display = (            
@@ -58,8 +44,8 @@ class TopBar extends Component<Props, TopBarState> {
                     </div>
                     {display}            
                     <NavList 
-                        curNav={this.state.curNav}
-                        onNavChange={this.onNavChange}
+                        curNav={this.props.curNav}
+                        onNavChange={this.props.onNavChange}
                     />           
                     <br className="clear" />
                 </div>

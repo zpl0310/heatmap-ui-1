@@ -3,11 +3,11 @@ import ViewList from './ViewList';
 import TimeRange from './TimeRange';
 
 export interface ControlBarProps {
-    
+    //TODO:
 }
  
 export interface ControlBarState {
-    
+    //TODO:
 }
  
 class ControlBar extends React.Component<ControlBarProps, ControlBarState> {
