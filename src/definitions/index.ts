@@ -1,6 +1,11 @@
 export type Instance = {
-    id: string
+    //id: string
     name: string
+}
+
+//used to get data from instance/map list server
+export type Map = {
+    id: number
 }
 
 export type MapInfo = {

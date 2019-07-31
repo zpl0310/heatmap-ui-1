@@ -2,60 +2,45 @@ import * as React from 'react';
 import InstanceListItem from './InstanceListItem';
 import SearchBox from './SearchBox';
 import '../../assets/styles/sidebar.scss';
-//import Divider from '@material-ui/core/Divider';
+import { Instance } from '../../definitions/index'
 
 export interface InstanceListProps {
     changeSidebarView: Function
     onChangeInstance: Function
+    instanceNameList: Instance[],
 }
 
 export interface InstanceListState {
-    instanceNameList: string[],
-    page: number,
-    numPerPage: number,
-    setPage: Function,
+    curFilter: string
 }
-
-//need to be get from API
-const defaultState = ({
-    instanceNameList: ["Cool Instance", "QA-latest", "Cool Instance 3",
-        "2nd floor", "Arrow Warehouse", "DHL Test Warehousr", "Fetch testing",
-        "Super Cool Instance", "Cool Instance 4", "Cool Instance 5", "Cool Instance 6",
-        "Cool Instance 7", "Cool Instance 8", "Cool Instance 9", "Cool Instance 10"],
-    page: 1,
-    numPerPage: 10,
-    setPage: () => { },
-})
 
 class InstanceList extends React.Component<InstanceListProps, InstanceListState> {
     constructor(props: InstanceListProps) {
         super(props);
-        this.state = { ...defaultState }
+        this.state = {
+            curFilter: ""
+        }
     }
 
-    // componentDidMount() {
-    //     this.loadInstances()
-    // }
-
     handleInput = (input: string) => {
-        const newNameList = defaultState.instanceNameList.filter(
-            name => {
-                return name.toLowerCase().includes(input.toLowerCase());
-            }
-        );
         this.setState({
-            instanceNameList: newNameList
+            curFilter: input
         })
     }
 
     render() {
-        const { instanceNameList } = this.state
+
+        const curNameList = this.props.instanceNameList.filter(
+            ins => {
+                return ins.name.toLowerCase().startsWith(this.state.curFilter.toLowerCase());
+            }
+        );
 
 
-        const instanceList = instanceNameList.map((name) => (
+        const instanceList = curNameList.map((ins) => (
             <InstanceListItem
-                key={name}
-                name={name}
+                key={ins.name}
+                name={ins.name}
                 onChangeInstance={this.props.onChangeInstance}
                 changeSidebarView={this.props.changeSidebarView}
             />

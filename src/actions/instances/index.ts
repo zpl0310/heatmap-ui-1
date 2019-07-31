@@ -1,6 +1,6 @@
 import { Instance } from '../../definitions'
 
-export const LOAD_INSTANCES = 'LOAD_INSTANCES'
+export const SET_INSTANCES = 'SET_INSTANCES'
 export const START_INSTANCE_LOADING = 'START_INSTANCE_LOADING'
 export const STOP_INSTANCE_LOADING = 'STOP_INSTANCE_LOADING'
 export const FAIL_INSTANCE_LOADING = 'FAIL_INSTANCE_LOADING'
@@ -20,8 +20,8 @@ type FailInstanceLoadingAction = {
     message: string
 }
 
-type LoadInstancesAction = {
-    type: typeof LOAD_INSTANCES
+type SetInstancesAction = {
+    type: typeof SET_INSTANCES
     instances: Instance[]
 }
 
@@ -30,7 +30,7 @@ type ChangeInstanceAction = {
     instanceName: string
 }
 
-export type InstanceAction = LoadInstancesAction |
+export type InstanceAction = SetInstancesAction |
     StartInstanceLoadingAction | 
     StopInstanceLoadingAction | 
     FailInstanceLoadingAction |

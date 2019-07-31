@@ -11,6 +11,7 @@ export interface MapListProps {
     changeSidebarView: Function,
     onChangeMap: Function,
     onClearCurMap: Function,
+    onLoadMaps: Function,
     maps: MapStoreState
 }
 
@@ -24,21 +25,17 @@ class MapList extends React.Component<MapListProps, MapListState> {
         this.props.onClearCurMap()
     }
 
+    componentWillMount() {
+        this.props.onLoadMaps(this.props.curInstance)
+    }
+
     render() {
         console.log(this.props)
-        // const maps=["a map","cool map","really cool map"]
-        // const mapList = maps.map((map)=> (
-        //     <MapListItem
-        //         key={map}
-        //         name={map}
-        //         curMap={this.props.maps.current}
-        //         onChangeMap={this.props.onChangeMap}
-        //     />
-        // ))
+
         const mapList = this.props.maps.list.map((map) => (
             <MapListItem
                 key={map.id}
-                name={map.name}
+                name={map.id}
                 curMap={this.props.maps.current}
                 onChangeMap={this.props.onChangeMap}
             />

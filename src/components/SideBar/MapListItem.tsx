@@ -11,9 +11,7 @@ export interface MapListItemState {
 }
 
 class MapListItem extends React.Component<MapListItemProps, MapListItemState> {
-    // constructor(props: MapListItemProps) {
-    //     super(props);
-    // }
+
     handleClick = () => {
         this.props.onChangeMap(this.props.name)
     }
@@ -30,7 +28,7 @@ class MapListItem extends React.Component<MapListItemProps, MapListItemState> {
                 className={this.getClassName(name)}
             >
                 <div>
-                    {name}
+                    Map {name}
                 </div>
             </li>
         );

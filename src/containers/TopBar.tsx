@@ -11,11 +11,8 @@ import { AppState } from '../store';
 
 const fetchLogo = require("../assets/fetchcore.svg") as string;
 
-type TopBarProps = {
-}
 
 type TopBarState = {
-    //need to get from redux store
     curNav: string,
     disabled: boolean,
 }
@@ -61,7 +58,7 @@ class TopBar extends Component<Props, TopBarState> {
             topbar = (
                 <div className="topBarMid">
                     <div className="topLeft">
-                        <label>{this.props.maps.current}</label>
+                        <label>Map {this.props.maps.current}</label>
                     </div>
                     {display}            
                     <NavList 
