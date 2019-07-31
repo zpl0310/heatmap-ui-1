@@ -19,10 +19,6 @@ class ViewListItem extends React.Component<ViewListItemProps, ViewListItemState>
         }
     }
 
-    // handleChange = (checked: boolean) => {
-    //     this.setState({ checked });
-    // }
-
    handleChange = () => {
        this.setState({
            checked: !this.state.checked

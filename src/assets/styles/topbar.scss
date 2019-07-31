@@ -15,7 +15,6 @@ $background-color: grey;
   padding-bottom: 10px;
   height: 122px;
   width: 250px;
-  //width: 25%;
 }
 
 .topBarMid {
@@ -31,7 +30,6 @@ $background-color: grey;
   color: $blue-color;
   font-weight: bold;
   font-size: 2.5em;
-  //height: 30%;
   padding-top: 1em;
   padding-left: 5%;
   overflow: hidden;
@@ -63,18 +61,15 @@ $background-color: grey;
   height: 80%;
   text-align: center;
   padding-top: 2.5em;
-  //padding-bottom: 32%;
 }
 
 .curNav {
   font-weight: bold;
   color: $blue-color;
-  //border-bottom: 3px solid $blue-color;
   min-width: 75px;
   height: 80%;
   text-align: center;
   padding-top: 2.5em;
-  //padding-bottom: 32%;
 }
 
 .topRightMid {
@@ -93,7 +88,6 @@ $background-color: grey;
   background-color: $divider-color;
   cursor: pointer;
   transition: background-color 0.5s ease;
-  //border-bottom: 3px solid $blue-color;
 }
 
 .navs:hover {

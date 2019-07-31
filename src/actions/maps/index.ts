@@ -27,6 +27,7 @@ type FailMapLoadingAction = {
 //     maps: MapInfo[]
 // }
 
+//temporarily used to align with the mock server
 type LoadMapsAction = {
     type: typeof LOAD_MAPS
     maps: Map[]

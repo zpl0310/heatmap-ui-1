@@ -32,7 +32,7 @@ class SideBar extends Component<Props, SideBarState> {
         console.log(this.props)
     }
 
-    //switch between instance list and map list
+    //switch between instance list and map list, consider to use react router
     changeSidebarView = () => {
         this.setState({
             displayInstance: !this.state.displayInstance,

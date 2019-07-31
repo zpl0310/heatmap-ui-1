@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PlotlyChart from 'react-plotlyjs-ts';
-import { ChartPoint } from '../../definitions'
+import { ChartPoint } from '../../definitions';
 
 type HisChartProps = {
     points: ChartPoint[]
@@ -23,17 +23,13 @@ class HisChart extends React.Component<HisChartProps, {}> {
                 name: 'Trending',
                 type: 'scatter',
                 x: labels,
-                y: values
-                //x: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-                //y: [6, 2, 3, 10, 8, 20, 16, 7, 1, 6, 3, 2]
+                y: values,
             },
             {
                 name: 'Mislocalizations',
                 type: 'bar',
                 x: labels,
-                y: values
-                //x: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-                //y: [6, 2, 3, 10, 8, 20, 16, 7, 1, 6, 3, 2]
+                y: values,
             }
         ];
         const layout = {

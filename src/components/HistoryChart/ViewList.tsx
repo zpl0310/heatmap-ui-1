@@ -1,16 +1,8 @@
 import * as React from 'react';
 
 import ViewListItem from './ViewListItem'
-
-export interface ViewListProps {
-    
-}
  
-export interface ViewListState {
-
-}
- 
-class ViewList extends React.Component<ViewListProps, ViewListState> {
+class ViewList extends React.Component<{}, {}> {
 
     render() { 
         const labels = ["Mislocalization Rate","Average Battery Level","Average Wifi Signals"]

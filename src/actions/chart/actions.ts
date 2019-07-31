@@ -5,12 +5,12 @@ import {
     START_CHART_LOADING,
     STOP_CHART_LOADING,
     FAIL_CHART_LOADING,
-    CHANGE_STARTDATE,
-    CHANGE_ENDDATE,
-    CHANGE_CUR_SELECTION,
-    CHANGE_INTERVAL,
+    // CHANGE_STARTDATE,
+    // CHANGE_ENDDATE,
+    // CHANGE_CUR_SELECTION,
+    // CHANGE_INTERVAL,
     chartAction,
-    chartStoreState
+    //chartStoreState
 } from '.'
 
 import { AppState } from '../../store'
@@ -18,7 +18,7 @@ import { AppState } from '../../store'
 import { ThunkDispatch } from 'redux-thunk'
 import axios, { AxiosResponse } from 'axios'
 
-//TODO: what exactly does history chart do ?
+//TODO: enable all control components once api is set up
 export const loadChart = () => async (dispatch: ThunkDispatch<AppState, undefined, chartAction>) => {
     dispatch({ type: START_CHART_LOADING })
 

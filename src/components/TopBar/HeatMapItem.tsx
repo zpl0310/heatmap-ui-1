@@ -3,11 +3,11 @@ import RobotLabel from './RobotLabel';
 import TimeFrame from './TimeFrame';
 
 export interface HeatMapItemProps {
-    
+    //TODO: 
 }
  
 export interface HeatMapItemState {
-    
+    //TODO:
 }
  
 class HeatMapItem extends React.Component<HeatMapItemProps, HeatMapItemState> {

@@ -39,6 +39,7 @@ class App extends React.Component<{}, AppState> {
 
   render() {
     const { curNav } = this.state
+    //consider to use react router
     let display = (<div />)
     if ( curNav === "History") {
       display = (<HistoryChart />)
@@ -64,8 +65,6 @@ class App extends React.Component<{}, AppState> {
             </div>
             <div className="bot-main"> 
               {display}           
-              {/* <LiveMap />             */}
-              {/* <HistoryChart /> */}
             </div>
           </div>
         </div>

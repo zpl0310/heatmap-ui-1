@@ -6,21 +6,23 @@ import HisChart from '../components/HistoryChart/HisChart'
 import ControlBar from '../components/HistoryChart/ControlBar'
 import { dispatchActions } from '../store/dispatch';
 import { AppState } from '../store';
-import { values } from 'd3';
 
 type HistoryChartProps = {
+    //TODO:
 }
 
 type HistoryChartState = {
+    //TODO:
 }
 
 type OwnProps = {
+    //TODO:
 }
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps) => ({ ...state, ...ownProps })
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof dispatchActions>
 
-
+//fake data of points used for testing purpose
 class HistoryChart extends Component<Props, HistoryChartState> {
     constructor(props: Props) {
         super(props);

@@ -29,6 +29,7 @@ export const loadMaps = (name: string) => async (dispatch: ThunkDispatch<AppStat
     dispatch({ type: START_MAP_LOADING })
     //api.GET("/instances/:instance_name/maps", handler.NewInstanceMapListHandler())
     try {
+        //TODO: need to change to actual API points
         const res: AxiosResponse = await axios.get(`http://localhost:8080/api/instances/${name}/maps`)
         //let maps = await getMaps(DEV_INSTANCE, 1, [])
         let maps = res.data.map((map: any): Map => ({

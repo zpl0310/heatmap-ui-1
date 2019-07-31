@@ -37,10 +37,6 @@ class SearchBox extends React.Component<SearchBoxProps, SearchBoxState> {
                     <SearchIcon />
                 </IconButton>
             </Paper>
-            // <input
-            //     placeholder = "Search for instance"
-            //     onChange={e => this.handleInputChange(e.currentTarget.value)}
-            // />
         );
     }
 }
