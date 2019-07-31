@@ -1,4 +1,5 @@
-import { MapInfo, MapImage,Map } from '../../definitions'
+//import { MapInfo, MapImage,Map } from '../../definitions'
+import { Map } from '../../definitions'
 import {
     LOAD_MAPS,
     CHANGE_MAP,
@@ -25,7 +26,6 @@ export const clearCurMap = (): MapAction => ({
     type: CLEAR_CURMAP
 })
 
-// *** might need to change after api set up
 export const loadMaps = (name: string) => async (dispatch: ThunkDispatch<AppState, undefined, MapAction>) => {
     dispatch({ type: START_MAP_LOADING })
     //api.GET("/instances/:instance_name/maps", handler.NewInstanceMapListHandler())
@@ -46,9 +46,4 @@ export const loadMaps = (name: string) => async (dispatch: ThunkDispatch<AppStat
 export const loadCurMap = (mapURL: string) => {
     //TODO
 }
-
-// export const loadMaps = (maps: Map[]): MapAction => ({
-//     type: LOAD_MAPS,
-//     maps
-// })
 

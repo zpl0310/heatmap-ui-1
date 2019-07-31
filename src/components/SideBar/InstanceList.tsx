@@ -11,44 +11,30 @@ export interface InstanceListProps {
 }
 
 export interface InstanceListState {
-    curNameList: Instance[],
-    // page: number,
-    // numPerPage: number,
-    // setPage: Function,
+    curFilter: string
 }
-
-//need to be get from API
-// const defaultState = ({
-//     instanceNameList: ["Cool Instance", "QA-latest", "Cool Instance 3",
-//         "2nd floor", "Arrow Warehouse", "DHL Test Warehousr", "Fetch testing",
-//         "Super Cool Instance", "Cool Instance 4", "Cool Instance 5", "Cool Instance 6",
-//         "Cool Instance 7", "Cool Instance 8", "Cool Instance 9", "Cool Instance 10"],
-//     page: 1,
-//     numPerPage: 10,
-//     setPage: () => { },
-// })
 
 class InstanceList extends React.Component<InstanceListProps, InstanceListState> {
     constructor(props: InstanceListProps) {
         super(props);
         this.state = {
-            curNameList: this.props.instanceNameList
+            curFilter: ""
         }
     }
 
     handleInput = (input: string) => {
-        const newNameList = this.props.instanceNameList.filter(
-            ins => {
-                return ins.name.toLowerCase().startsWith(input.toLowerCase());
-            }
-        );
         this.setState({
-            curNameList: newNameList
+            curFilter: input
         })
     }
 
     render() {
-        const { curNameList } = this.state
+
+        const curNameList = this.props.instanceNameList.filter(
+            ins => {
+                return ins.name.toLowerCase().startsWith(this.state.curFilter.toLowerCase());
+            }
+        );
 
 
         const instanceList = curNameList.map((ins) => (
@@ -67,7 +53,6 @@ class InstanceList extends React.Component<InstanceListProps, InstanceListState>
                     <div className="searchBox">
                         <SearchBox
                             handleInput={this.handleInput}
-                            //handleInput={()=>{}}
                         />
                     </div>
                 </div>
