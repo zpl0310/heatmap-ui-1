@@ -60,7 +60,7 @@ $background-color: grey;
 .navs {
   min-width: 75px;
   font-size: 1em;
-  height: 20px;
+  height: 80%;
   text-align: center;
   padding-top: 2.5em;
   //padding-bottom: 32%;
@@ -71,7 +71,7 @@ $background-color: grey;
   color: $blue-color;
   //border-bottom: 3px solid $blue-color;
   min-width: 75px;
-  height: 20px;
+  height: 80%;
   text-align: center;
   padding-top: 2.5em;
   //padding-bottom: 32%;
@@ -82,6 +82,7 @@ $background-color: grey;
   flex-direction: row;
   position: relative;
 }
+
 .navsWrapper {
   flex: 1;
   height: 110px;

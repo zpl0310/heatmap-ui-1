@@ -8,17 +8,11 @@ import MapList from '../components/SideBar/MapList';
 import { dispatchActions } from '../store/dispatch';
 import { AppState } from '../store';
 
-
-type SideBarProps = {
-
-}
-
 type SideBarState = {
     displayInstance: boolean,
-    isLoading: boolean
 }
 
-const mapStateToProps = (state: AppState, ownProps: SideBarProps) => ({ ...state, ...ownProps })
+const mapStateToProps = (state: AppState, ownProps: {}) => ({ ...state, ...ownProps })
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof dispatchActions>
 
 class SideBar extends Component<Props, SideBarState> {
@@ -26,7 +20,6 @@ class SideBar extends Component<Props, SideBarState> {
         super(props);
         this.state = {
             displayInstance: true,
-            isLoading: true,
         }
     }
 

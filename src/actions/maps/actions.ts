@@ -1,4 +1,5 @@
-import { MapInfo, MapImage,Map } from '../../definitions'
+//import { MapInfo, MapImage,Map } from '../../definitions'
+import { Map } from '../../definitions'
 import {
     LOAD_MAPS,
     CHANGE_MAP,

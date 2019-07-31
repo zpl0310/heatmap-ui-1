@@ -1,27 +1,23 @@
 import * as React from 'react';
 import { connect } from 'react-redux'
 import { Component } from 'react';
+import { dispatchActions } from '../store/dispatch';
+import { AppState } from '../store';
 
 import '../assets/styles/topbar.scss';
 import NavList from '../components/TopBar/NavList';
 import HeatMapItem from '../components/TopBar/HeatMapItem';
 import CompareItem from '../components/TopBar/CompareItem';
-import { dispatchActions } from '../store/dispatch';
-import { AppState } from '../store';
+
 
 const fetchLogo = require("../assets/fetchcore.svg") as string;
-
 
 type TopBarState = {
     curNav: string,
     disabled: boolean,
 }
 
-export interface OwnProps {
-    
-}
-
-const mapStateToProps = (state: AppState, ownProps: OwnProps) => ({ ...state, ...ownProps })
+const mapStateToProps = (state: AppState, ownProps: {}) => ({ ...state, ...ownProps })
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof dispatchActions>
 
 class TopBar extends Component<Props, TopBarState> {
