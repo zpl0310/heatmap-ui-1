@@ -11,6 +11,7 @@ export interface MapListProps {
     changeSidebarView: Function,
     onChangeMap: Function,
     onClearCurMap: Function,
+    onLoadMaps: Function,
     maps: MapStoreState
 }
 
@@ -22,6 +23,10 @@ class MapList extends React.Component<MapListProps, MapListState> {
     handleClick = () => {
         this.props.changeSidebarView()
         this.props.onClearCurMap()
+    }
+
+    componentWillMount() {
+        this.props.onLoadMaps(this.props.curInstance)
     }
 
     render() {

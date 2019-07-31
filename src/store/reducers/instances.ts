@@ -1,5 +1,5 @@
 import {
-    LOAD_INSTANCES,
+    SET_INSTANCES,
     CHANGE_INSTANCE, 
     FAIL_INSTANCE_LOADING,
     STOP_INSTANCE_LOADING,
@@ -19,7 +19,7 @@ const initial: InstanceStoreState = {
 
 export default function instances(state = initial, action: InstanceAction): InstanceStoreState {
     switch (action.type) {
-        case LOAD_INSTANCES:
+        case SET_INSTANCES:
             return Object.assign({},state,{
                 list: action.instances,
                 error:"",
