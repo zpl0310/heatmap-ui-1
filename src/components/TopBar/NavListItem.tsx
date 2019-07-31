@@ -25,7 +25,7 @@ class NavListItem extends React.Component<NavListItemProps, NavListItemState> {
                 onClick={()=>this.handleClick(this.props.name)}
                 className={this.getClassName(this.props.name)}
                 >
-                <label>{this.props.name}</label>
+                {this.props.name}
             </div>
         );
     }
