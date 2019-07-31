@@ -5,7 +5,7 @@ import {
     STOP_MAP_LOADING,
     START_MAP_LOADING,
     CLEAR_CURMAP,
-    LOAD_CUR_MAP,
+//    LOAD_CUR_MAP,
     MapAction,
     MapStoreState,
 } from '../../actions/maps'
