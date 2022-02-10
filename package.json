@@ -22,7 +22,7 @@
     "bootstrap": "^4.3.1",
     "double-ended-queue": "^2.1.0-0",
     "jalali-react-datepicker": "0.0.1-alpha-01",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "pixi-viewport": "^4.1.0",
     "pixi.js": "^5.1.0",
     "plotly.js": "^1.49.1",
